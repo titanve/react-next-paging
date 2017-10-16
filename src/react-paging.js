@@ -106,7 +106,7 @@ class ReactNextPaging extends React.Component {
         {this.props.children(this.state)}
         {this.state.noitems > 0 ? (
           <tr>
-            <td colSpan="5" style={{ textAlign: "center" }}>
+            <td colSpan={this.props.nocolumns} style={{ textAlign: "center" }}>
               <button onClick={this.goBack}>{"<"}</button>
               {` ${this.state.currentpage}/${this.state.nopages} `}
               <button onClick={this.goFwd}>{">"}</button>
