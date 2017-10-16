@@ -18,6 +18,11 @@ class ReactNextPaging extends React.Component {
     lastitem: 10
   };
 
+  static defaultProps = {
+    itemsperpage: 10,
+    items: []
+  };
+
   componentDidMount() {
     const { items } = this.props;
     // console.log(`items didMount: ${items}`);
