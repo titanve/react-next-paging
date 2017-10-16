@@ -5,9 +5,15 @@ class ReactPaging extends React.Component {
 
   componentDidMount() {
     const { items } = this.props;
-
+    console.log(`items didMount: ${items}`);
     this.setState({
       nopages: Math.ceil(items.length / this.state.itemsperpage)
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      nopages: Math.ceil(nextProps.items.length / this.state.itemsperpage)
     });
   }
 
