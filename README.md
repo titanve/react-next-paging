@@ -58,6 +58,7 @@ import PaginacionTabla from "PaginacionTabla/PaginacionTabla";
   </thead>
   <PaginacionTabla
     itemsperpage={this.state.itemsperpage}
+    nocolumns={this.state.nocolumns}
     items={filas}
   />
 </table>
