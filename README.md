@@ -1,18 +1,18 @@
-# react-paging
+# react-next-paging
 Pagination react component
 
 ```javascript
 import React from "react";
-import ReactPaging from "../react-paging/react-paging";
+import ReactNextPaging from "../react-next-paging/react-next-paging";
 
 const PaginacionTabla = ({ itemsperpage, items }) => {
   return (
-    <ReactPaging itemsperpage={itemsperpage} items={items}>
+    <ReactNextPaging itemsperpage={itemsperpage} items={items}>
       {paging =>
         items.slice(paging.initialitem, paging.lastitem).map((item, index) => {
           return item;
         })}
-    </ReactPaging>
+    </ReactNextPaging>
   );
 };
 
