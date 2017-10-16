@@ -63,12 +63,10 @@ import PaginacionTabla from "PaginacionTabla/PaginacionTabla";
 
 ### itemsperpage
 
-> `number` | defaults to `null`
+> `number` | defaults to `10`
 
 Pass a number which represents the number of items per page.
 
 ### items
-
-> `any` | defaults to `null`
 
 Pass an array of table row items that should be rendered.
