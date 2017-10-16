@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-class ReactPaging extends React.Component {
+class ReactNextPaging extends React.Component {
   static propTypes = {
     children: PropTypes.func
   };
@@ -52,18 +52,18 @@ class ReactPaging extends React.Component {
   computeBackLimits = prevpage => {
     let newinitialitem = (prevpage - 1) * this.props.itemsperpage;
     let newlastitem = Math.abs(prevpage * this.props.itemsperpage);
-    console.log(
-      `computeBackLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
-    );
+    // console.log(
+    //   `computeBackLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
+    // );
     return { newinitialitem, newlastitem };
   };
 
   computeFwdLimits = nextpage => {
     let newinitialitem = (nextpage - 1) * this.props.itemsperpage;
     let newlastitem = nextpage * this.props.itemsperpage;
-    console.log(
-      `computeFwdLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
-    );
+    // console.log(
+    //   `computeFwdLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
+    // );
     return { newinitialitem, newlastitem };
   };
 
@@ -113,4 +113,4 @@ class ReactPaging extends React.Component {
   }
 }
 
-export default ReactPaging;
+export default ReactNextPaging;
