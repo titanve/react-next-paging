@@ -58,3 +58,17 @@ import PaginacionTabla from "PaginacionTabla/PaginacionTabla";
   />
 </table>
 ```
+
+## Props
+
+### itemsperpage
+
+> `number` | defaults to `null`
+
+Pass a number which represents the number of items per page.
+
+### items
+
+> `any` | defaults to `null`
+
+Pass an array of table row items that should be rendered.
