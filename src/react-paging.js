@@ -20,7 +20,7 @@ class ReactNextPaging extends React.Component {
 
   componentDidMount() {
     const { items } = this.props;
-    console.log(`items didMount: ${items}`);
+    // console.log(`items didMount: ${items}`);
     this.setState({
       nopages: Math.ceil(items.length / this.props.itemsperpage),
       noitems: items.length
