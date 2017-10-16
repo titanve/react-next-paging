@@ -17,7 +17,7 @@ npm install --save react-next-paging
 
 ```javascript
 import React from "react";
-import ReactNextPaging from "../react-next-paging/react-next-paging";
+import ReactNextPaging from "react-next-paging";
 
 const PaginacionTabla = ({ itemsperpage, items }) => {
   return (
