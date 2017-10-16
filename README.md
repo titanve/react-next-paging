@@ -1,7 +1,7 @@
 # react-paging
 Pagination react component
 
-```
+```{javascript}
 import React from "react";
 import ReactPaging from "../react-paging/react-paging";
 
