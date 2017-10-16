@@ -1,0 +1,30 @@
+{
+  "name": "react-next-paging",
+  "version": "1.0.3",
+  "description": "ReactJS component for easy pagination",
+  "keywords": [
+    "pagination",
+    "paging",
+    "react",
+    "reactjs",
+    "page",
+    "table",
+    "ul",
+    "row",
+    "column"
+  ],
+  "author": "Rafael Mora <rafael.mora.guti@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "prop-types": ">=15",
+    "react": ">=15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/titanve/react-next-paging.git"
+  },
+  "bugs": {
+    "url": "https://github.com/titanve/react-next-paging/issues"
+  },
+  "homepage": "https://github.com/titanve/react-next-paging#readme"
+}
