@@ -69,4 +69,6 @@ Pass a number which represents the number of items per page.
 
 ### items
 
+> `any` | defaults to `[]`
+
 Pass an array of table row items that should be rendered.
