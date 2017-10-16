@@ -14,24 +14,27 @@ class ReactPaging extends React.Component {
     nopages: 0,
     currentpage: 1,
     noitems: 0,
-    itemsperpage: 4,
     initialitem: 0,
-    lastitem: 4
+    lastitem: 10
   };
 
   componentDidMount() {
     const { items } = this.props;
     console.log(`items didMount: ${items}`);
     this.setState({
-      nopages: Math.ceil(items.length / this.state.itemsperpage),
+      nopages: Math.ceil(items.length / this.props.itemsperpage),
       noitems: items.length
     });
   }
 
   componentWillReceiveProps(nextProps) {
+    let newinitialitem = (this.state.currentpage - 1) * nextProps.itemsperpage;
+    let newlastitem = this.state.currentpage * nextProps.itemsperpage;
     this.setState({
-      nopages: Math.ceil(nextProps.items.length / this.state.itemsperpage),
-      noitems: nextProps.items.length
+      nopages: Math.ceil(nextProps.items.length / nextProps.itemsperpage),
+      noitems: nextProps.items.length,
+      initialitem: newinitialitem,
+      lastitem: newlastitem
     });
   }
 
@@ -40,15 +43,15 @@ class ReactPaging extends React.Component {
 
     if (items.length != prevProps.items.length) {
       this.setState({
-        nopages: Math.ceil(items.length / this.state.itemsperpage),
+        nopages: Math.ceil(items.length / this.props.itemsperpage),
         noitems: items.length
       });
     }
   }
 
   computeBackLimits = prevpage => {
-    let newinitialitem = (prevpage - 1) * this.state.itemsperpage;
-    let newlastitem = Math.abs(prevpage * this.state.itemsperpage);
+    let newinitialitem = (prevpage - 1) * this.props.itemsperpage;
+    let newlastitem = Math.abs(prevpage * this.props.itemsperpage);
     console.log(
       `computeBackLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
     );
@@ -56,8 +59,8 @@ class ReactPaging extends React.Component {
   };
 
   computeFwdLimits = nextpage => {
-    let newinitialitem = (nextpage - 1) * this.state.itemsperpage;
-    let newlastitem = nextpage * this.state.itemsperpage;
+    let newinitialitem = (nextpage - 1) * this.props.itemsperpage;
+    let newlastitem = nextpage * this.props.itemsperpage;
     console.log(
       `computeFwdLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
     );
