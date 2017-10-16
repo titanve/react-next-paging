@@ -1,6 +1,20 @@
 # react-next-paging
 Pagination react component
 
+## Installation
+
+This module is distributed via [npm][npm] which is bundled with [node][node] and
+should be installed as one of your project's `dependencies`:
+
+```
+npm install --save react-next-paging
+```
+
+> This package also depends on `react` and `prop-types`. Please make sure you
+> have those installed as well.
+
+## Usage
+
 ```javascript
 import React from "react";
 import ReactNextPaging from "../react-next-paging/react-next-paging";
