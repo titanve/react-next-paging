@@ -21,7 +21,11 @@ import ReactNextPaging from "react-next-paging";
 
 const PaginacionTabla = ({ itemsperpage, items }) => {
   return (
-    <ReactNextPaging itemsperpage={itemsperpage} items={items}>
+    <ReactNextPaging
+      itemsperpage={itemsperpage}
+      nocolumns={nocolumns}
+      items={items}
+    >
       {paging =>
         items.slice(paging.initialitem, paging.lastitem).map((item, index) => {
           return item;
@@ -66,6 +70,12 @@ import PaginacionTabla from "PaginacionTabla/PaginacionTabla";
 > `number` | defaults to `10`
 
 Pass a number which represents the number of items per page.
+
+### nocolumns
+
+> `number` 
+
+Pass a number which represents the number of columns for the `<td/>` `colSpan` property.
 
 ### items
 
