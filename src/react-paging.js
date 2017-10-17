@@ -15,7 +15,9 @@ class ReactNextPaging extends React.Component {
     currentpage: 1,
     noitems: 0,
     initialitem: 0,
-    lastitem: 10
+    lastitem: 10,
+    goBackBdisabled: true,
+    goFwdBdisabled: true
   };
 
   static defaultProps = {
@@ -24,39 +26,54 @@ class ReactNextPaging extends React.Component {
   };
 
   componentDidMount() {
-    const { items } = this.props;
+    const { items, itemsperpage } = this.props;
     // console.log(`items didMount: ${items}`);
+    let newnopages = this.getNoPages(items, itemsperpage);
     this.setState({
-      nopages: Math.ceil(items.length / this.props.itemsperpage),
+      nopages: newnopages,
       noitems: items.length
     });
   }
 
   componentWillReceiveProps(nextProps) {
-    let newinitialitem = (this.state.currentpage - 1) * nextProps.itemsperpage;
-    let newlastitem = this.state.currentpage * nextProps.itemsperpage;
+    let { currentpage } = this.state;
+    let newnopages = this.getNoPages(nextProps.items, nextProps.itemsperpage);
+    let newcurrentpage = currentpage;
+    if (currentpage > newnopages) {
+      newcurrentpage = 1;
+    }
+    let newinitialitem = (newcurrentpage - 1) * nextProps.itemsperpage;
+    let newlastitem = newcurrentpage * nextProps.itemsperpage;
     this.setState({
-      nopages: Math.ceil(nextProps.items.length / nextProps.itemsperpage),
+      nopages: newnopages,
       noitems: nextProps.items.length,
       initialitem: newinitialitem,
-      lastitem: newlastitem
+      lastitem: newlastitem,
+      currentpage: newcurrentpage,
+      goBackBdisabled: this.goBackButtonState(newcurrentpage),
+      goFwdBdisabled: this.goFwdButtonState(newcurrentpage, newnopages)
     });
   }
 
   componentDidUpdate(prevProps) {
-    const { items } = this.props;
+    const { items, itemsperpage } = this.props;
 
     if (items.length != prevProps.items.length) {
       this.setState({
-        nopages: Math.ceil(items.length / this.props.itemsperpage),
+        nopages: this.getNoPages(items, itemsperpage),
         noitems: items.length
       });
     }
   }
 
+  getNoPages = (items, itemsperpage) => {
+    return Math.ceil(items.length / itemsperpage);
+  };
+
   computeBackLimits = prevpage => {
-    let newinitialitem = (prevpage - 1) * this.props.itemsperpage;
-    let newlastitem = Math.abs(prevpage * this.props.itemsperpage);
+    let { itemsperpage } = this.props;
+    let newinitialitem = (prevpage - 1) * itemsperpage;
+    let newlastitem = Math.abs(prevpage * itemsperpage);
     // console.log(
     //   `computeBackLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
     // );
@@ -64,8 +81,9 @@ class ReactNextPaging extends React.Component {
   };
 
   computeFwdLimits = nextpage => {
-    let newinitialitem = (nextpage - 1) * this.props.itemsperpage;
-    let newlastitem = nextpage * this.props.itemsperpage;
+    let { itemsperpage } = this.props;
+    let newinitialitem = (nextpage - 1) * itemsperpage;
+    let newlastitem = nextpage * itemsperpage;
     // console.log(
     //   `computeFwdLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
     // );
@@ -74,29 +92,51 @@ class ReactNextPaging extends React.Component {
 
   goBack = () => {
     // console.log(`goBack()`);
-    if (this.state.currentpage > 1) {
-      let prevpage = this.state.currentpage - 1;
+    let { currentpage, nopages } = this.state;
+    if (currentpage > 1) {
+      let prevpage = currentpage - 1;
       let newlimits = this.computeBackLimits(prevpage);
       // console.log(`goBack() new page: ${prevpage}`);
       this.setState({
         currentpage: prevpage,
         initialitem: newlimits.newinitialitem,
-        lastitem: newlimits.newlastitem
+        lastitem: newlimits.newlastitem,
+        goBackBdisabled: this.goBackButtonState(prevpage),
+        goFwdBdisabled: this.goFwdButtonState(prevpage, nopages)
       });
     }
   };
 
   goFwd = () => {
     // console.log(`goFwd()`);
-    if (this.state.currentpage < this.state.nopages) {
+    let { nopages } = this.state;
+    if (this.state.currentpage < nopages) {
       let nextpage = this.state.currentpage + 1;
       let newlimits = this.computeFwdLimits(nextpage);
       // console.log(`goFwd() new page: ${nextpage}`);
       this.setState({
         currentpage: nextpage,
         initialitem: newlimits.newinitialitem,
-        lastitem: newlimits.newlastitem
+        lastitem: newlimits.newlastitem,
+        goBackBdisabled: this.goBackButtonState(nextpage),
+        goFwdBdisabled: this.goFwdButtonState(nextpage, nopages)
       });
+    }
+  };
+
+  goBackButtonState = prevpage => {
+    if (prevpage <= 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  goFwdButtonState = (nextpage, nopages) => {
+    if (nextpage >= nopages) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -107,9 +147,16 @@ class ReactNextPaging extends React.Component {
         {this.state.noitems > 0 ? (
           <tr>
             <td colSpan={this.props.nocolumns} style={{ textAlign: "center" }}>
-              <button onClick={this.goBack}>{"<"}</button>
+              <button
+                onClick={this.goBack}
+                disabled={this.state.goBackBdisabled}
+              >
+                {"<"}
+              </button>
               {` ${this.state.currentpage}/${this.state.nopages} `}
-              <button onClick={this.goFwd}>{">"}</button>
+              <button onClick={this.goFwd} disabled={this.state.goFwdBdisabled}>
+                {">"}
+              </button>
             </td>
           </tr>
         ) : null}
