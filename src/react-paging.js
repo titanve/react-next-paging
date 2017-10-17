@@ -1,6 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+function composeEventHandlers(...fns) {
+  return (event, ...args) =>
+    fns.some(fn => {
+      fn && fn(event, ...args);
+      return event.defaultPrevented;
+    });
+}
+
 class ReactNextPaging extends React.Component {
   static propTypes = {
     children: PropTypes.func
@@ -140,28 +148,57 @@ class ReactNextPaging extends React.Component {
     }
   };
 
+  getBackButtonProps = ({ onClick, ...rest } = {}) => {
+    const eventHandlers = {
+      onClick: composeEventHandlers(onClick, this.goBack)
+    };
+    return {
+      role: "button",
+      ...eventHandlers,
+      ...rest
+    };
+  };
+
+  getFwdButtonProps = ({ onClick, ...rest } = {}) => {
+    const eventHandlers = {
+      onClick: composeEventHandlers(onClick, this.goFwd)
+    };
+    return {
+      role: "button",
+      ...eventHandlers,
+      ...rest
+    };
+  };
+
+  getStateAndHelpers() {
+    const {
+      nopages,
+      currentpage,
+      noitems,
+      initialitem,
+      lastitem,
+      goBackBdisabled,
+      goFwdBdisabled
+    } = this.state;
+    const { getBackButtonProps, getFwdButtonProps } = this;
+    return {
+      // prop getters
+      getBackButtonProps,
+      getFwdButtonProps,
+
+      // state
+      nopages,
+      currentpage,
+      noitems,
+      initialitem,
+      lastitem,
+      goBackBdisabled,
+      goFwdBdisabled
+    };
+  }
+
   render() {
-    return (
-      <tbody>
-        {this.props.children(this.state)}
-        {this.state.noitems > 0 ? (
-          <tr>
-            <td colSpan={this.props.nocolumns} style={{ textAlign: "center" }}>
-              <button
-                onClick={this.goBack}
-                disabled={this.state.goBackBdisabled}
-              >
-                {"<"}
-              </button>
-              {` ${this.state.currentpage}/${this.state.nopages} `}
-              <button onClick={this.goFwd} disabled={this.state.goFwdBdisabled}>
-                {">"}
-              </button>
-            </td>
-          </tr>
-        ) : null}
-      </tbody>
-    );
+    return this.props.children(this.getStateAndHelpers());
   }
 }
 
