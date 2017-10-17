@@ -19,17 +19,43 @@ npm install --save react-next-paging
 import React from "react";
 import ReactNextPaging from "react-next-paging";
 
-const PaginacionTabla = ({ itemsperpage, items }) => {
+const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
   return (
     <ReactNextPaging
       itemsperpage={itemsperpage}
       nocolumns={nocolumns}
       items={items}
     >
-      {paging =>
-        items.slice(paging.initialitem, paging.lastitem).map((item, index) => {
-          return item;
-        })}
+      {({
+        getBackButtonProps,
+        getFwdButtonProps,
+        nopages,
+        currentpage,
+        noitems,
+        initialitem,
+        lastitem,
+        goBackBdisabled,
+        goFwdBdisabled
+      }) => (
+        <tbody>
+          {items.slice(initialitem, lastitem).map((item, index) => {
+            return item;
+          })}
+          {noitems > 0 ? (
+            <tr>
+              <td colSpan={nocolumns} style={{ textAlign: "center" }}>
+                <button {...getBackButtonProps()} disabled={goBackBdisabled}>
+                  {"<"}
+                </button>
+                {` ${currentpage}/${nopages} `}
+                <button {...getFwdButtonProps()} disabled={goFwdBdisabled}>
+                  {">"}
+                </button>
+              </td>
+            </tr>
+          ) : null}
+        </tbody>
+      )}
     </ReactNextPaging>
   );
 };
@@ -74,7 +100,7 @@ Pass a number which represents the number of items per page.
 
 ### nocolumns
 
-> `number` 
+> `number`
 
 Pass a number which represents the number of columns for the `<td/>` `colSpan` property.
 
