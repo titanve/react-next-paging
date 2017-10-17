@@ -1,6 +1,6 @@
 {
   "name": "react-next-paging",
-  "version": "1.0.3",
+  "version": "1.0.10",
   "description": "ReactJS component for easy pagination",
   "keywords": [
     "pagination",
@@ -15,8 +15,10 @@
   ],
   "author": "Rafael Mora <rafael.mora.guti@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.0.0"
+  },
   "peerDependencies": {
-    "prop-types": ">=15",
     "react": ">=15"
   },
   "repository": {
