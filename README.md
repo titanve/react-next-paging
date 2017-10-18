@@ -19,6 +19,15 @@ npm install --save react-next-paging
 import React from "react";
 import ReactNextPaging from "react-next-paging";
 
+const buttonStyles = {
+  border: "1px solid #ccc",
+  background: "#fff",
+  fontSize: "1em",
+  padding: 10,
+  margin: 5,
+  width: 70
+};
+
 const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
   return (
     <ReactNextPaging
@@ -44,11 +53,19 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
           {noitems > 0 ? (
             <tr>
               <td colSpan={nocolumns} style={{ textAlign: "center" }}>
-                <button {...getBackButtonProps()} disabled={goBackBdisabled}>
+                <button
+                  style={buttonStyles}
+                  {...getBackButtonProps()}
+                  disabled={goBackBdisabled}
+                >
                   {"<"}
                 </button>
                 {` ${currentpage}/${nopages} `}
-                <button {...getFwdButtonProps()} disabled={goFwdBdisabled}>
+                <button
+                  style={buttonStyles}
+                  {...getFwdButtonProps()}
+                  disabled={goFwdBdisabled}
+                >
                   {">"}
                 </button>
               </td>
