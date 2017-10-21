@@ -10,6 +10,12 @@ should be installed as one of your project's `dependencies`:
 npm install --save react-next-paging
 ```
 
+or if you use `yarn`:
+
+```
+yarn add react-next-paging
+```
+
 > This package also depends on `react` and `prop-types`. Please make sure you
 > have those installed as well.
 
