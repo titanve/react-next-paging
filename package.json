@@ -2,7 +2,7 @@
   "name": "react-next-paging",
   "version": "1.1.2",
   "description": "ReactJS component for easy pagination",
-  "main": "react-next-paging.js",
+  "main": "src/eact-next-paging.js",
   "keywords": [
     "pagination",
     "paging",
