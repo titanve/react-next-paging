@@ -25,7 +25,9 @@ class ReactNextPaging extends React.Component {
     initialitem: 0,
     lastitem: 10,
     goBackBdisabled: true,
-    goFwdBdisabled: true
+    goFastBackBdisabled: true,
+    goFwdBdisabled: true,
+    goFastFwdBdisabled: true
   };
 
   static defaultProps = {
@@ -59,7 +61,9 @@ class ReactNextPaging extends React.Component {
       lastitem: newlastitem,
       currentpage: newcurrentpage,
       goBackBdisabled: this.goBackButtonState(newcurrentpage),
-      goFwdBdisabled: this.goFwdButtonState(newcurrentpage, newnopages)
+      goFastBackBdisabled: this.goFastBackButtonState(newcurrentpage),
+      goFwdBdisabled: this.goFwdButtonState(newcurrentpage, newnopages),
+      goFastFwdBdisabled: this.goFastFwdButtonState(newcurrentpage, newnopages)
     });
   }
 
@@ -110,7 +114,28 @@ class ReactNextPaging extends React.Component {
         initialitem: newlimits.newinitialitem,
         lastitem: newlimits.newlastitem,
         goBackBdisabled: this.goBackButtonState(prevpage),
-        goFwdBdisabled: this.goFwdButtonState(prevpage, nopages)
+        goFastBackBdisabled: this.goFastBackButtonState(prevpage),
+        goFwdBdisabled: this.goFwdButtonState(prevpage, nopages),
+        goFastFwdBdisabled: this.goFastFwdButtonState(prevpage, nopages)
+      });
+    }
+  };
+
+  goFastBack = () => {
+    // console.log(`goBack()`);
+    let { currentpage, nopages } = this.state;
+    if (currentpage > 1) {
+      let prevpage = 1;
+      let newlimits = this.computeBackLimits(prevpage);
+      // console.log(`goBack() new page: ${prevpage}`);
+      this.setState({
+        currentpage: prevpage,
+        initialitem: newlimits.newinitialitem,
+        lastitem: newlimits.newlastitem,
+        goBackBdisabled: this.goBackButtonState(prevpage),
+        goFastBackBdisabled: this.goFastBackButtonState(prevpage),
+        goFwdBdisabled: this.goFwdButtonState(prevpage, nopages),
+        goFastFwdBdisabled: this.goFastFwdButtonState(prevpage, nopages)
       });
     }
   };
@@ -127,12 +152,41 @@ class ReactNextPaging extends React.Component {
         initialitem: newlimits.newinitialitem,
         lastitem: newlimits.newlastitem,
         goBackBdisabled: this.goBackButtonState(nextpage),
-        goFwdBdisabled: this.goFwdButtonState(nextpage, nopages)
+        goFastBackBdisabled: this.goFastBackButtonState(nextpage),
+        goFwdBdisabled: this.goFwdButtonState(nextpage, nopages),
+        goFastFwdBdisabled: this.goFastFwdButtonState(nextpage, nopages)
+      });
+    }
+  };
+
+  goFastFwd = () => {
+    // console.log(`goFwd()`);
+    let { nopages } = this.state;
+    if (this.state.currentpage < nopages) {
+      let nextpage = nopages * 1;
+      let newlimits = this.computeFwdLimits(nextpage);
+      // console.log(`goFwd() new page: ${nextpage}`);
+      this.setState({
+        currentpage: nextpage,
+        initialitem: newlimits.newinitialitem,
+        lastitem: newlimits.newlastitem,
+        goBackBdisabled: this.goBackButtonState(nextpage),
+        goFastBackBdisabled: this.goFastBackButtonState(nextpage),
+        goFwdBdisabled: this.goFwdButtonState(nextpage, nopages),
+        goFastFwdBdisabled: this.goFastFwdButtonState(nextpage, nopages)
       });
     }
   };
 
   goBackButtonState = prevpage => {
+    if (prevpage <= 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  goFastBackButtonState = prevpage => {
     if (prevpage <= 1) {
       return true;
     } else {
@@ -148,9 +202,28 @@ class ReactNextPaging extends React.Component {
     }
   };
 
+  goFastFwdButtonState = (nextpage, nopages) => {
+    if (nextpage >= nopages) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   getBackButtonProps = ({ onClick, ...rest } = {}) => {
     const eventHandlers = {
       onClick: composeEventHandlers(onClick, this.goBack)
+    };
+    return {
+      role: "button",
+      ...eventHandlers,
+      ...rest
+    };
+  };
+
+  getFastBackButtonProps = ({ onClick, ...rest } = {}) => {
+    const eventHandlers = {
+      onClick: composeEventHandlers(onClick, this.goFastBack)
     };
     return {
       role: "button",
@@ -170,6 +243,17 @@ class ReactNextPaging extends React.Component {
     };
   };
 
+  getFastFwdButtonProps = ({ onClick, ...rest } = {}) => {
+    const eventHandlers = {
+      onClick: composeEventHandlers(onClick, this.goFastFwd)
+    };
+    return {
+      role: "button",
+      ...eventHandlers,
+      ...rest
+    };
+  };
+
   getStateAndHelpers() {
     const {
       nopages,
@@ -178,13 +262,22 @@ class ReactNextPaging extends React.Component {
       initialitem,
       lastitem,
       goBackBdisabled,
-      goFwdBdisabled
+      goFastBackBdisabled,
+      goFwdBdisabled,
+      goFastFwdBdisabled
     } = this.state;
-    const { getBackButtonProps, getFwdButtonProps } = this;
+    const {
+      getBackButtonProps,
+      getFastBackButtonProps,
+      getFwdButtonProps,
+      getFastFwdButtonProps
+    } = this;
     return {
       // prop getters
       getBackButtonProps,
+      getFastBackButtonProps,
       getFwdButtonProps,
+      getFastFwdButtonProps,
 
       // state
       nopages,
@@ -193,7 +286,9 @@ class ReactNextPaging extends React.Component {
       initialitem,
       lastitem,
       goBackBdisabled,
-      goFwdBdisabled
+      goFastBackBdisabled,
+      goFwdBdisabled,
+      goFastFwdBdisabled
     };
   }
 
