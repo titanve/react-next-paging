@@ -6,7 +6,7 @@ Pagination react component
 
 ## Installation
 
-This module is distributed via [npm][npm] which is bundled with [node][node] and
+This module is distributed via [npm] which is bundled with [node] and
 should be installed as one of your project's `dependencies`:
 
 ```shell
@@ -46,14 +46,18 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
     >
       {({
         getBackButtonProps,
+        getFastBackButtonProps,
         getFwdButtonProps,
+        getFastFwdButtonProps,
         nopages,
         currentpage,
         noitems,
         initialitem,
         lastitem,
         goBackBdisabled,
-        goFwdBdisabled
+        goFastBackBdisabled,
+        goFwdBdisabled,
+        goFastFwdBdisabled
       }) => (
         <tbody>
           {items.slice(initialitem, lastitem).map((item, index) => {
@@ -62,6 +66,13 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
           {noitems > 0 ? (
             <tr>
               <td colSpan={nocolumns} style={{ textAlign: "center" }}>
+                <button
+                  style={buttonStyles}
+                  {...getFastBackButtonProps()}
+                  disabled={goFastBackBdisabled}
+                >
+                  {"<<"}
+                </button>
                 <button
                   style={buttonStyles}
                   {...getBackButtonProps()}
@@ -76,6 +87,13 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
                   disabled={goFwdBdisabled}
                 >
                   {">"}
+                </button>
+                <button
+                  style={buttonStyles}
+                  {...getFastFwdButtonProps()}
+                  disabled={goFastFwdBdisabled}
+                >
+                  {">>"}
                 </button>
               </td>
             </tr>
