@@ -9,13 +9,13 @@ Pagination react component
 This module is distributed via [npm][npm] which is bundled with [node][node] and
 should be installed as one of your project's `dependencies`:
 
-```
+```shell
 npm install --save react-next-paging
 ```
 
 or if you use `yarn`:
 
-```
+```shell
 yarn add react-next-paging
 ```
 
@@ -135,3 +135,7 @@ Pass a number which represents the number of columns for the `<td/>` `colSpan` p
 > `any` | defaults to `[]`
 
 Pass an array of table row items that should be rendered.
+
+### license
+
+*react-next-paging* is available under the MIT License.
