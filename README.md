@@ -1,8 +1,8 @@
 # react-next-paging
 Pagination react component
 
-[![NPM total downloads](https://img.shields.io/npm/dt/react-nex-paging.svg?style=flat)](https://npmcharts.com/compare/react-nex-paging?minimal=true)
-[![NPM monthly downloads](https://img.shields.io/npm/dm/react-nex-paging.svg?style=flat)](https://npmcharts.com/compare/react-nex-paging?minimal=true)
+[![NPM total downloads](https://img.shields.io/npm/dt/react-next-paging.svg?style=flat)](https://npmcharts.com/compare/react-next-paging?minimal=true)
+[![NPM monthly downloads](https://img.shields.io/npm/dm/react-next-paging.svg?style=flat)](https://npmcharts.com/compare/react-next-paging?minimal=true)
 
 ## Installation
 
