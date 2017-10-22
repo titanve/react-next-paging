@@ -23,7 +23,7 @@ yarn add react-next-paging
 
 ## Usage
 
-```javascript
+```jsx
 import React from "react";
 import ReactNextPaging from "react-next-paging";
 
@@ -91,7 +91,7 @@ export default PaginacionTabla;
 
 and in the main app file
 
-```javascript
+```jsx
 import React, { Component } from "react";
 import PaginacionTabla from "PaginacionTabla/PaginacionTabla";
 .
