@@ -2,6 +2,7 @@
 Pagination react component
 
 [![https://nodei.co/npm/react-next-paging.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/react-next-paging.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/react-next-paging)
+[![NPM](https://nodei.co/npm-dl/react-next-paging.png)](https://nodei.co/npm/react-next-paging/)
 
 ## Installation
 
