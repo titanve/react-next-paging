@@ -2,6 +2,7 @@
 Pagination react component
 
 [![downloads][downloads-badge]][npmcharts]
+[![downloads](https://npmcharts.com/compare/react-next-paging)](https://npmcharts.com/compare/react-next-paging)
 
 ## Installation
 
