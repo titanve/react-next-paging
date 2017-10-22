@@ -136,6 +136,6 @@ Pass a number which represents the number of columns for the `<td/>` `colSpan` p
 
 Pass an array of table row items that should be rendered.
 
-### license
+## License
 
 *react-next-paging* is available under the MIT License.
