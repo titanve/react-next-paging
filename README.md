@@ -49,6 +49,7 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
         getFastBackButtonProps,
         getFwdButtonProps,
         getFastFwdButtonProps,
+        getSelPageButtonProps,
         nopages,
         currentpage,
         noitems,
@@ -63,41 +64,57 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
           {items.slice(initialitem, lastitem).map((item, index) => {
             return item;
           })}
-          {noitems > 0 ? (
-            <tr>
-              <td colSpan={nocolumns} style={{ textAlign: "center" }}>
-                <button
-                  style={buttonStyles}
-                  {...getFastBackButtonProps()}
-                  disabled={goFastBackBdisabled}
-                >
-                  {"<<"}
-                </button>
-                <button
-                  style={buttonStyles}
-                  {...getBackButtonProps()}
-                  disabled={goBackBdisabled}
-                >
-                  {"<"}
-                </button>
-                {` ${currentpage}/${nopages} `}
-                <button
-                  style={buttonStyles}
-                  {...getFwdButtonProps()}
-                  disabled={goFwdBdisabled}
-                >
-                  {">"}
-                </button>
-                <button
-                  style={buttonStyles}
-                  {...getFastFwdButtonProps()}
-                  disabled={goFastFwdBdisabled}
-                >
-                  {">>"}
-                </button>
-              </td>
-            </tr>
-          ) : null}
+          {noitems > 0
+            ? [
+                <tr key={100}>
+                  <td colSpan={nocolumns} style={{ textAlign: "center" }}>
+                    <button
+                      style={buttonStyles}
+                      {...getFastBackButtonProps()}
+                      disabled={goFastBackBdisabled}
+                    >
+                      {"<<"}
+                    </button>
+                    <button
+                      style={buttonStyles}
+                      {...getBackButtonProps()}
+                      disabled={goBackBdisabled}
+                    >
+                      {"<"}
+                    </button>
+                    {[...Array(nopages).keys()].map((page, i) => {
+                      return (
+                        <button
+                          key={i + 1}
+                          {...getSelPageButtonProps({ page: page + 1 })}
+                        >
+                          {page + 1}
+                        </button>
+                      );
+                    })}
+                    <button
+                      style={buttonStyles}
+                      {...getFwdButtonProps()}
+                      disabled={goFwdBdisabled}
+                    >
+                      {">"}
+                    </button>
+                    <button
+                      style={buttonStyles}
+                      {...getFastFwdButtonProps()}
+                      disabled={goFastFwdBdisabled}
+                    >
+                      {">>"}
+                    </button>
+                  </td>
+                </tr>,
+                <tr key={200}>
+                  <td colSpan={nocolumns} style={{ textAlign: "center" }}>
+                    {` ${currentpage}/${nopages} `}
+                  </td>
+                </tr>
+              ]
+            : null}
         </tbody>
       )}
     </ReactNextPaging>
