@@ -85,7 +85,7 @@ class ReactNextPaging extends React.Component {
   computeBackLimits = prevpage => {
     let { itemsperpage } = this.props;
     let newinitialitem = (prevpage - 1) * itemsperpage;
-    let newlastitem = Math.abs(prevpage * itemsperpage);
+    let newlastitem = prevpage * itemsperpage;
     // console.log(
     //   `computeBackLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
     // );
@@ -100,6 +100,34 @@ class ReactNextPaging extends React.Component {
     //   `computeFwdLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
     // );
     return { newinitialitem, newlastitem };
+  };
+
+  computeSelectedPageLimits = selpage => {
+    let { itemsperpage } = this.props;
+    let newinitialitem = (selpage - 1) * itemsperpage;
+    let newlastitem = selpage * itemsperpage;
+    // console.log(
+    //   `computeFwdLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
+    // );
+    return { newinitialitem, newlastitem };
+  };
+
+  goToPage = (page, event) => {
+    let { currentpage, nopages } = this.state;
+    if (page > 0 && page <= nopages) {
+      // let prevpage = currentpage - 1;
+      let newlimits = this.computeSelectedPageLimits(page);
+      // console.log(`goBack() new page: ${prevpage}`);
+      this.setState({
+        currentpage: page,
+        initialitem: newlimits.newinitialitem,
+        lastitem: newlimits.newlastitem,
+        goBackBdisabled: this.goBackButtonState(page),
+        goFastBackBdisabled: this.goFastBackButtonState(page),
+        goFwdBdisabled: this.goFwdButtonState(page, nopages),
+        goFastFwdBdisabled: this.goFastFwdButtonState(page, nopages)
+      });
+    }
   };
 
   goBack = () => {
@@ -142,8 +170,8 @@ class ReactNextPaging extends React.Component {
 
   goFwd = () => {
     // console.log(`goFwd()`);
-    let { nopages } = this.state;
-    if (this.state.currentpage < nopages) {
+    let { nopages, currentpage } = this.state;
+    if (currentpage < nopages) {
       let nextpage = this.state.currentpage + 1;
       let newlimits = this.computeFwdLimits(nextpage);
       // console.log(`goFwd() new page: ${nextpage}`);
@@ -161,8 +189,8 @@ class ReactNextPaging extends React.Component {
 
   goFastFwd = () => {
     // console.log(`goFwd()`);
-    let { nopages } = this.state;
-    if (this.state.currentpage < nopages) {
+    let { nopages, currentpage } = this.state;
+    if (currentpage < nopages) {
       let nextpage = nopages * 1;
       let newlimits = this.computeFwdLimits(nextpage);
       // console.log(`goFwd() new page: ${nextpage}`);
@@ -254,6 +282,19 @@ class ReactNextPaging extends React.Component {
     };
   };
 
+  getSelPageButtonProps = ({ onClick, page, ...rest } = {}) => {
+    const eventHandlers = {
+      onClick: composeEventHandlers(onClick, event =>
+        this.goToPage(page, event)
+      )
+    };
+    return {
+      role: "button",
+      ...eventHandlers,
+      ...rest
+    };
+  };
+
   getStateAndHelpers() {
     const {
       nopages,
@@ -270,7 +311,8 @@ class ReactNextPaging extends React.Component {
       getBackButtonProps,
       getFastBackButtonProps,
       getFwdButtonProps,
-      getFastFwdButtonProps
+      getFastFwdButtonProps,
+      getSelPageButtonProps
     } = this;
     return {
       // prop getters
@@ -278,6 +320,7 @@ class ReactNextPaging extends React.Component {
       getFastBackButtonProps,
       getFwdButtonProps,
       getFastFwdButtonProps,
+      getSelPageButtonProps,
 
       // state
       nopages,
