@@ -85,7 +85,7 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
                     {[...Array(nopages).keys()].map((page, i) => {
                       return (
                         <button
-                          key={i + 1}
+                          key={i}
                           {...getSelPageButtonProps({ page: page + 1 })}
                         >
                           {page + 1}
