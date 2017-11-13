@@ -2,7 +2,14 @@
   "name": "react-next-paging",
   "version": "1.1.8",
   "description": "ReactJS component for easy pagination",
-  "main": "src/react-next-paging.js",
+  "main": "dist/react-next-paging.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "npm-run-all --parallel build:*",
+    "build:main": "babel --plugins transform-class-properties --copy-files --out-dir dist --ignore *.test.js src",
+    "build:umd": "webpack --output-filename index.umd.js",
+    "build:umd.min": "webpack --output-filename index.umd.min.js -p"
+  },
   "keywords": [
     "pagination",
     "paging",
@@ -17,11 +24,30 @@
   "author": "Rafael Mora <rafael.mora.guti@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "prop-types": "^15.0.0"
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "babel-register": "6.26.0",
+    "npm-run-all": "4.1.2",
+    "path": "0.12.7",
+    "prop-types": "15.6.0",
+    "rimraf": "2.6.2",
+    "webpack": "3.8.1"
   },
   "peerDependencies": {
     "react": ">=15"
   },
+  "babel": {
+    "presets": ["babel-preset-env", "babel-preset-react", "babel-preset-stage-0"]
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/titanve/react-next-paging.git"
