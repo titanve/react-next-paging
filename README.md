@@ -1,4 +1,5 @@
 # react-next-paging
+
 Pagination react component
 
 [![NPM total downloads](https://img.shields.io/npm/dt/react-next-paging.svg?style=flat)](https://npmcharts.com/compare/react-next-paging?minimal=true)
@@ -6,8 +7,8 @@ Pagination react component
 
 ## Installation
 
-This module is distributed via [npm] which is bundled with [node] and
-should be installed as one of your project's `dependencies`:
+This module is distributed via [npm] which is bundled with [node] and should be
+installed as one of your project's `dependencies`:
 
 ```shell
 npm install --save react-next-paging
@@ -87,6 +88,7 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
                         <button
                           key={i}
                           {...getSelPageButtonProps({ page: page + 1 })}
+                          disabled={currentpage == page + 1 ? true : false}
                         >
                           {page + 1}
                         </button>
@@ -122,7 +124,6 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
 };
 
 export default PaginacionTabla;
-
 ```
 
 and in the main app file
@@ -163,7 +164,8 @@ Pass a number which represents the number of items per page.
 
 > `number`
 
-Pass a number which represents the number of columns for the `<td/>` `colSpan` property.
+Pass a number which represents the number of columns for the `<td/>` `colSpan`
+property.
 
 ### items
 
@@ -173,4 +175,4 @@ Pass an array of table row items that should be rendered.
 
 ## License
 
-*react-next-paging* is available under the MIT License.
+_react-next-paging_ is available under the MIT License.
