@@ -1,6 +1,8 @@
 # react-next-paging
 
-Pagination react component
+Pagination react component <br>
+<img src="https://cdn.rawgit.com/titanve/react-next-paging/788358af/other/demo/demo.PNG?raw=true" alt="react-next-paging demo" title="eact-next-paging demo" width="300">
+<br>
 
 [![NPM total downloads](https://img.shields.io/npm/dt/react-next-paging.svg?style=flat)](https://npmcharts.com/compare/react-next-paging?minimal=true)
 [![NPM monthly downloads](https://img.shields.io/npm/dm/react-next-paging.svg?style=flat)](https://npmcharts.com/compare/react-next-paging?minimal=true)
