@@ -1,14 +1,16 @@
 {
   "name": "react-next-paging",
-  "version": "1.2.0",
+  "version": "0.0.0-semantically-released",
   "description": "ReactJS component for easy pagination",
   "main": "dist/react-next-paging.js",
   "scripts": {
+    "commit": "git-cz",
     "prebuild": "rimraf dist",
     "build": "npm-run-all --parallel build:*",
     "build:main": "babel --copy-files --out-dir dist --ignore *.test.js src",
     "build:umd": "webpack --output-filename index.umd.js",
-    "build:umd.min": "webpack --output-filename index.umd.min.js -p"
+    "build:umd.min": "webpack --output-filename index.umd.min.js -p",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "pagination",
@@ -29,6 +31,8 @@
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.1.0",
     "npm-run-all": "4.1.2",
     "path": "0.12.7",
     "prop-types": "15.6.0",
@@ -56,5 +60,11 @@
   "bugs": {
     "url": "https://github.com/titanve/react-next-paging/issues"
   },
-  "homepage": "https://github.com/titanve/react-next-paging#readme"
+  "homepage": "https://github.com/titanve/react-next-paging#readme",
+  "devDependencies": {
+    "semantic-release": "^8.2.0"
+  },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
+  }
 }
