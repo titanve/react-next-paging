@@ -2,7 +2,7 @@
 react-next-paging
 
 <br>
-<img src="https://cdn.rawgit.com/titanve/react-next-paging/788358af/other/demo/demo.PNG?raw=true" alt="react-next-paging demo" title="eact-next-paging demo" width="300">
+<img src="https://cdn.rawgit.com/titanve/react-next-paging/788358af/other/demo/demo.PNG?raw=true" alt="react-next-paging demo" title="react-next-paging demo" width="300">
 <br>
 
 </h1>
