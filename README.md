@@ -13,8 +13,9 @@ react-next-paging
 
 ## Installation
 
-This module is distributed via [npm] which is bundled with [node] and should be
-installed as one of your project's `dependencies`:
+This module is distributed via [npm](https://www.npmjs.com) which is bundled
+with [node](https://nodejs.org) and should be installed as one of your project's
+`dependencies`:
 
 ```shell
 npm install --save react-next-paging
