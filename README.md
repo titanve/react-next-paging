@@ -85,17 +85,19 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
                     >
                       {"<"}
                     </button>
-                    {[...Array(nopages).keys()].map((page, i) => {
-                      return (
-                        <button
-                          key={i}
-                          {...getSelPageButtonProps({ page: page + 1 })}
-                          disabled={currentpage == page + 1 ? true : false}
-                        >
-                          {page + 1}
-                        </button>
-                      );
-                    })}
+                    {Array.from({ length: nopages }, (v, i) => i + 1).map(
+                      page => {
+                        return (
+                          <button
+                            key={page}
+                            {...getSelPageButtonProps({ page: page })}
+                            disabled={currentpage == page}
+                          >
+                            {page}
+                          </button>
+                        );
+                      }
+                    )}
                     <button
                       style={buttonStyles}
                       {...getFwdButtonProps()}
@@ -110,11 +112,6 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
                     >
                       {">>"}
                     </button>
-                  </td>
-                </tr>,
-                <tr key={200}>
-                  <td colSpan={nocolumns} style={{ textAlign: "center" }}>
-                    {` ${currentpage}/${nopages} `}
                   </td>
                 </tr>
               ]
