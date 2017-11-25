@@ -11,6 +11,7 @@ react-next-paging
 [![NPM total downloads](https://img.shields.io/npm/dt/react-next-paging.svg?style=flat)](https://npmcharts.com/compare/react-next-paging?minimal=true)
 [![NPM monthly downloads](https://img.shields.io/npm/dm/react-next-paging.svg?style=flat)](https://npmcharts.com/compare/react-next-paging?minimal=true)
 [![NPM version](https://badge.fury.io/js/react-next-paging.svg)](http://badge.fury.io/js/react-next-paging)
+[![Build Status](https://travis-ci.org/titanve/react-next-paging.svg?branch=master)](https://travis-ci.org/titanve/react-next-paging)
 
 ## Installation
 
