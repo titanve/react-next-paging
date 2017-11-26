@@ -5,8 +5,8 @@
   "main": "dist/react-next-paging.js",
   "scripts": {
     "commit": "git-cz",
-    "test": "mocha --require babel-core/register src/index.test.js -w",
-    "test:single": "mocha --require babel-core/register src/index.test.js",
+    "test": "NODE_PATH=./src mocha --require babel-core/register src/index.test.js -w",
+    "test:single": "NODE_PATH=./src mocha --require babel-core/register src/index.test.js",
     "prebuild": "rimraf dist",
     "build": "npm-run-all --parallel build:*",
     "build:main": "babel --copy-files --out-dir dist --ignore *.test.js src",
@@ -70,7 +70,9 @@
     "semantic-release": "^8.2.0",
     "webpack": "3.8.1"
   },
-  "czConfig": {
-    "path": "node_modules/cz-conventional-changelog"
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }
