@@ -28,7 +28,6 @@
   "author": "Rafael Mora <rafael.mora.guti@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "babel-cli": "6.26.0",
     "babel-loader": "7.1.2",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
@@ -59,6 +58,7 @@
   },
   "homepage": "https://github.com/titanve/react-next-paging#readme",
   "devDependencies": {
+    "babel-cli": "6.26.0",
     "chai": "4.1.2",
     "commitizen": "2.9.6",
     "cz-conventional-changelog": "2.1.0",
