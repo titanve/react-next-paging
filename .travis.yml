@@ -2,6 +2,9 @@ language: node_js
 cache:
   directories:
     - ~/.npm
+branches:
+  only:
+    - master
 notifications:
   email: false
 node_js:
@@ -13,6 +16,7 @@ before_install:
   - yarn add react --peer
 script:
   - yarn test:single
+  - yarn run build
 after_success:
   - npm run semantic-release
 branches:
