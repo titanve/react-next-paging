@@ -74,7 +74,7 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
           {items.slice(initialitem, lastitem).map((item, index) => {
             return item;
           })}
-          {noitems > 0
+          {noitems > itemsperpage
             ? [
                 <tr key={100}>
                   <td colSpan={nocolumns} style={{ textAlign: "center" }}>
