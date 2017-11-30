@@ -74,55 +74,51 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
           {items.slice(initialitem, lastitem).map((item, index) => {
             return item;
           })}
-          {noitems > itemsperpage
-            ? [
-                <tr key={100}>
-                  <td colSpan={nocolumns} style={{ textAlign: "center" }}>
+          {noitems > itemsperpage ? (
+            <tr key={100}>
+              <td colSpan={nocolumns} style={{ textAlign: "center" }}>
+                <button
+                  style={buttonStyles}
+                  {...getFastBackButtonProps()}
+                  disabled={goFastBackBdisabled}
+                >
+                  {"<<"}
+                </button>
+                <button
+                  style={buttonStyles}
+                  {...getBackButtonProps()}
+                  disabled={goBackBdisabled}
+                >
+                  {"<"}
+                </button>
+                {Array.from({ length: nopages }, (v, i) => i + 1).map(page => {
+                  return (
                     <button
-                      style={buttonStyles}
-                      {...getFastBackButtonProps()}
-                      disabled={goFastBackBdisabled}
+                      key={page}
+                      {...getSelPageButtonProps({ page: page })}
+                      disabled={currentpage == page}
                     >
-                      {"<<"}
+                      {page}
                     </button>
-                    <button
-                      style={buttonStyles}
-                      {...getBackButtonProps()}
-                      disabled={goBackBdisabled}
-                    >
-                      {"<"}
-                    </button>
-                    {Array.from({ length: nopages }, (v, i) => i + 1).map(
-                      page => {
-                        return (
-                          <button
-                            key={page}
-                            {...getSelPageButtonProps({ page: page })}
-                            disabled={currentpage == page}
-                          >
-                            {page}
-                          </button>
-                        );
-                      }
-                    )}
-                    <button
-                      style={buttonStyles}
-                      {...getFwdButtonProps()}
-                      disabled={goFwdBdisabled}
-                    >
-                      {">"}
-                    </button>
-                    <button
-                      style={buttonStyles}
-                      {...getFastFwdButtonProps()}
-                      disabled={goFastFwdBdisabled}
-                    >
-                      {">>"}
-                    </button>
-                  </td>
-                </tr>
-              ]
-            : null}
+                  );
+                })}
+                <button
+                  style={buttonStyles}
+                  {...getFwdButtonProps()}
+                  disabled={goFwdBdisabled}
+                >
+                  {">"}
+                </button>
+                <button
+                  style={buttonStyles}
+                  {...getFastFwdButtonProps()}
+                  disabled={goFastFwdBdisabled}
+                >
+                  {">>"}
+                </button>
+              </td>
+            </tr>
+          ) : null}
         </tbody>
       )}
     </ReactNextPaging>
