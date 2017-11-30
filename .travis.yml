@@ -18,7 +18,7 @@ script:
   - yarn test:single
   - yarn run build
 after_success:
-  - npm run semantic-release
+  - yarn semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
