@@ -29,6 +29,14 @@ or if you use `yarn`:
 yarn add react-next-paging
 ```
 
+The UMD build is also available on [unpkg](https://unpkg.com):
+
+```html
+<script src="https://unpkg.com/react-next-paging/dist/index.umd.min.js"></script>
+```
+
+You can find the library on `window.ReactNextPaging`.
+
 > This package also depends on `react` and `prop-types`. Please make sure you
 > have those installed as well.
 
