@@ -1,8 +1,7 @@
-var expect = require("chai").expect;
-var ReactNextPaging = require("./index");
+import ReactNextPaging from "./index";
 
-describe("react-next-paging", function() {
-  it("should work!", function() {
-    expect(true).to.be.true;
+describe("react-next-paging", () => {
+  it("should work!", () => {
+    expect(true).toBe(true);
   });
 });

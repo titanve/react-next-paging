@@ -5,14 +5,14 @@
   "main": "dist/react-next-paging.js",
   "scripts": {
     "commit": "git-cz",
-    "test": "mocha --require babel-core/register src/index.test.js -w",
-    "test:single": "mocha --require babel-core/register src/index.test.js",
     "prebuild": "rimraf dist",
     "build": "npm-run-all --parallel build:*",
     "build:main": "babel --copy-files --out-dir dist --ignore *.test.js src",
     "build:umd": "webpack --output-filename index.umd.js",
     "build:umd.min": "webpack --output-filename index.umd.min.js -p",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "pagination",
@@ -59,21 +59,21 @@
   "homepage": "https://github.com/titanve/react-next-paging#readme",
   "devDependencies": {
     "babel-cli": "6.26.0",
-    "chai": "4.1.2",
+    "babel-core": "6.26.0",
+    "babel-jest": "22.4.1",
     "commitizen": "2.9.6",
     "cz-conventional-changelog": "2.1.0",
     "ghooks": "2.0.1",
-    "mocha": "4.0.1",
+    "jest": "22.4.2",
     "npm-run-all": "4.1.2",
     "path": "0.12.7",
-    "react-test-renderer": "16.1.1",
     "rimraf": "2.6.2",
     "semantic-release": "^8.2.0",
     "webpack": "3.8.1"
   },
   "config": {
     "ghooks": {
-      "pre-commit": "yarn test:single"
+      "pre-commit": "yarn test"
     },
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
