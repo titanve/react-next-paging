@@ -1,7 +1,8 @@
 import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import ReactNextPaging, { getNoPages } from "./react-next-paging";
+import ReactNextPaging from "./index";
+import { getNoPages } from "./react-next-paging";
 
 Enzyme.configure({ adapter: new Adapter() });
 
