@@ -13,7 +13,7 @@ node_js:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh
   - export PATH="$HOME/.yarn/bin:$PATH"
-  - yarn add react
+  - yarn add react react-dom
   - yarn add --dev jest babel-jest babel-core enzyme enzyme-adapter-react-16
   - yarn add --dev react-test-renderer
 script:
