@@ -46,7 +46,11 @@ export const getIniPageofArray = (nopages, pagesspan, page) => {
 
 class ReactNextPaging extends React.Component {
   static propTypes = {
-    children: PropTypes.func
+    children: PropTypes.func,
+    itemsperpage: PropTypes.number,
+    nocolumns: PropTypes.number,
+    items: PropTypes.array,
+    pagesspan: PropTypes.number
   };
 
   constructor(props) {
