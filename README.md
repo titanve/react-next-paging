@@ -188,7 +188,7 @@ property.
 
 ### pagesspan
 
-> `number`
+> `number` | defaults to `10`
 
 Pass a number which represents the pages span.
 
