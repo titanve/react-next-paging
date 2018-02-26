@@ -5,6 +5,7 @@ cache:
 branches:
   only:
     - master
+    - testingbranch
 notifications:
   email: false
 node_js:
