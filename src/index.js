@@ -1,5 +1,5 @@
 // import ReactNextPaging from './react-next-paging'
-import ReactNextPaging from "./react-next-paging";
+import ReactNextPaging, { getNoPages } from "./react-next-paging";
 
 /*
  * Fix importing in typescript after rollup compilation

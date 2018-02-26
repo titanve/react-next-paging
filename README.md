@@ -55,12 +55,13 @@ const buttonStyles = {
   width: 70
 };
 
-const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
+const PaginacionTabla = ({ itemsperpage, nocolumns, items, pagesspan }) => {
   return (
     <ReactNextPaging
       itemsperpage={itemsperpage}
       nocolumns={nocolumns}
       items={items}
+      pagesspan={pagesspan}
     >
       {({
         getBackButtonProps,
@@ -69,6 +70,8 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
         getFastFwdButtonProps,
         getSelPageButtonProps,
         nopages,
+        inipagearray,
+        pagesforarray,
         currentpage,
         noitems,
         initialitem,
@@ -82,51 +85,56 @@ const PaginacionTabla = ({ itemsperpage, nocolumns, items }) => {
           {items.slice(initialitem, lastitem).map((item, index) => {
             return item;
           })}
-          {noitems > itemsperpage ? (
-            <tr key={100}>
-              <td colSpan={nocolumns} style={{ textAlign: "center" }}>
-                <button
-                  style={buttonStyles}
-                  {...getFastBackButtonProps()}
-                  disabled={goFastBackBdisabled}
-                >
-                  {"<<"}
-                </button>
-                <button
-                  style={buttonStyles}
-                  {...getBackButtonProps()}
-                  disabled={goBackBdisabled}
-                >
-                  {"<"}
-                </button>
-                {Array.from({ length: nopages }, (v, i) => i + 1).map(page => {
-                  return (
+          {noitems > 0
+            ? [
+                <tr key={"pagingrow" + 100}>
+                  <td colSpan={nocolumns} style={{ textAlign: "center" }}>
                     <button
-                      key={page}
-                      {...getSelPageButtonProps({ page: page })}
-                      disabled={currentpage == page}
+                      style={buttonStyles}
+                      {...getFastBackButtonProps()}
+                      disabled={goFastBackBdisabled}
                     >
-                      {page}
+                      {"<<"}
                     </button>
-                  );
-                })}
-                <button
-                  style={buttonStyles}
-                  {...getFwdButtonProps()}
-                  disabled={goFwdBdisabled}
-                >
-                  {">"}
-                </button>
-                <button
-                  style={buttonStyles}
-                  {...getFastFwdButtonProps()}
-                  disabled={goFastFwdBdisabled}
-                >
-                  {">>"}
-                </button>
-              </td>
-            </tr>
-          ) : null}
+                    <button
+                      style={buttonStyles}
+                      {...getBackButtonProps()}
+                      disabled={goBackBdisabled}
+                    >
+                      {"<"}
+                    </button>
+                    {Array.from(
+                      { length: pagesforarray },
+                      (v, i) => i + inipagearray
+                    ).map(page => {
+                      return (
+                        <button
+                          key={page}
+                          {...getSelPageButtonProps({ page: page })}
+                          disabled={currentpage == page}
+                        >
+                          {page}
+                        </button>
+                      );
+                    })}
+                    <button
+                      style={buttonStyles}
+                      {...getFwdButtonProps()}
+                      disabled={goFwdBdisabled}
+                    >
+                      {">"}
+                    </button>
+                    <button
+                      style={buttonStyles}
+                      {...getFastFwdButtonProps()}
+                      disabled={goFastFwdBdisabled}
+                    >
+                      {">>"}
+                    </button>
+                  </td>
+                </tr>
+              ]
+            : null}
         </tbody>
       )}
     </ReactNextPaging>
@@ -158,6 +166,7 @@ import PaginacionTabla from "PaginacionTabla/PaginacionTabla";
     itemsperpage={this.state.itemsperpage}
     nocolumns={this.state.nocolumns}
     items={filas}
+    pagesspan={4}
   />
 </table>
 ```
@@ -176,6 +185,12 @@ Pass a number which represents the number of items per page.
 
 Pass a number which represents the number of columns for the `<td/>` `colSpan`
 property.
+
+### pagesspan
+
+> `number`
+
+Pass a number which represents the pages span.
 
 ### items
 
