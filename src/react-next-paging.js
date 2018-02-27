@@ -32,23 +32,23 @@ export const getIniPageofArray = (nopages, pagesspan, page, inipagearray) => {
       // let pagesforarray = pagesspan;
       let halfspan = getHalfPagesArray(pagesspan);
       if (page > halfspan + inipagearray) {
-        if (isNoEven(page)) {
-          // return page - 4; ///  1 2 3 4 5 6 7 8 9 10
-          return page - halfspan > 0 ? page - halfspan : 1;
-        } else {
-          // return page - 5;
-          return page - halfspan - 1 > 0 ? page - halfspan - 1 : 1;
-        }
+        // if (isNoEven(page)) {
+        // return page - 4; ///  1 2 3 4 5 6 7 8 9 10
+        return page - halfspan > 0 ? page - halfspan : 1;
+        // } else {
+        //   // return page - 5;
+        //   return page - halfspan - 1 > 0 ? page - halfspan - 1 : 1;
+        // }
       } else {
-        if (isNoEven(page)) {
-          // return inipagearray - 4; ///  1 2 3 4 5 6 7 8 9 10
-          return inipagearray - halfspan > 0 ? inipagearray - halfspan : 1;
-        } else {
-          // return inipagearray - 5;
-          return inipagearray - halfspan - 1 > 0
-            ? inipagearray - halfspan - 1
-            : 1;
-        }
+        // if (isNoEven(page)) {
+        // return inipagearray - 4; ///  1 2 3 4 5 6 7 8 9 10
+        return inipagearray - halfspan > 0 ? inipagearray - halfspan : 1;
+        // } else {
+        //   // return inipagearray - 5;
+        //   return inipagearray - halfspan - 1 > 0
+        //     ? inipagearray - halfspan - 1
+        //     : 1;
+        // }
       }
     }
   }

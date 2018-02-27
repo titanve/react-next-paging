@@ -148,7 +148,7 @@ describe("getIniPageofArray", () => {
     let inipagearray = 1;
     let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
-    expect(actual).toBe(3);
+    expect(actual).toBe(4);
   });
 
   it("should return 12 given page 17 nopages > pagesspan", () => {
@@ -158,7 +158,7 @@ describe("getIniPageofArray", () => {
     let inipagearray = 1;
     let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
-    expect(actual).toBe(11);
+    expect(actual).toBe(12);
   });
 
   it("should return 2 given page 3 nopages > pagesspan", () => {
