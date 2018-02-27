@@ -210,4 +210,24 @@ describe("getIniPageofArray", () => {
 
     expect(actual).toBe(4);
   });
+
+  it("should return 2 given page 5 nopages < pagesspan", () => {
+    let nopages = 5;
+    let pagesspan = 4;
+    let page = 5;
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
+
+    expect(actual).toBe(2);
+  });
+
+  it("should return 2 given page 4 nopages < pagesspan", () => {
+    let nopages = 5;
+    let pagesspan = 4;
+    let page = 4;
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
+
+    expect(actual).toBe(2);
+  });
 });
