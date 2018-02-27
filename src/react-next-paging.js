@@ -39,6 +39,16 @@ export const getIniPageofArray = (nopages, pagesspan, page, inipagearray) => {
           // return page - 5;
           return page - halfspan - 1 > 0 ? page - halfspan - 1 : 1;
         }
+      } else {
+        if (isNoEven(page)) {
+          // return inipagearray - 4; ///  1 2 3 4 5 6 7 8 9 10
+          return inipagearray - halfspan > 0 ? inipagearray - halfspan : 1;
+        } else {
+          // return inipagearray - 5;
+          return inipagearray - halfspan - 1 > 0
+            ? inipagearray - halfspan - 1
+            : 1;
+        }
       }
     }
   }
