@@ -14,7 +14,8 @@ export const getNoPages = (items = [], itemsperpage) => {
 };
 
 export const getHalfPagesArray = pagesforarray => {
-  return Math.ceil(pagesforarray / 2);
+  // return Math.ceil(pagesforarray / 2);
+  return Math.floor(pagesforarray / 2);
 };
 
 export const isNoPagesLargerPagesSpan = (nopages, pagesspan) => {
@@ -25,12 +26,12 @@ export const isNoEven = no => {
   return no % 2 === 0;
 };
 
-export const getIniPageofArray = (nopages, pagesspan, page) => {
+export const getIniPageofArray = (nopages, pagesspan, page, inipagearray) => {
   if (isNoPagesLargerPagesSpan(nopages, pagesspan)) {
     if (page <= nopages) {
       // let pagesforarray = pagesspan;
       let halfspan = getHalfPagesArray(pagesspan);
-      if (page > halfspan) {
+      if (page > halfspan + inipagearray) {
         if (isNoEven(page)) {
           // return page - 4; ///  1 2 3 4 5 6 7 8 9 10
           return page - halfspan > 0 ? page - halfspan : 1;
@@ -47,7 +48,6 @@ export const getIniPageofArray = (nopages, pagesspan, page) => {
 class ReactNextPaging extends React.Component {
   static propTypes = {
     children: PropTypes.func,
-    itemsperpage: PropTypes.number,
     nocolumns: PropTypes.number,
     items: PropTypes.array,
     pagesspan: PropTypes.number
@@ -153,7 +153,7 @@ class ReactNextPaging extends React.Component {
   };
 
   goToPage = (page, event) => {
-    let { currentpage, nopages, pagesspan } = this.state;
+    let { currentpage, nopages, pagesspan, inipagearray } = this.state;
     if (page > 0 && page <= nopages) {
       // let prevpage = currentpage - 1;
       let newlimits = this.computeSelectedPageLimits(page);
@@ -161,11 +161,16 @@ class ReactNextPaging extends React.Component {
       // console.log({ titulo: "nopages", valor: nopages });
       // console.log({ titulo: "pagesspan", valor: pagesspan });
       // console.log({ titulo: "page", valor: page });
-      let inipagearray = getIniPageofArray(nopages, pagesspan, page);
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        page,
+        inipagearray
+      );
       // console.log({ titulo: "goToPage->inipagearray", valor: inipagearray });
       // console.log(`goBack() new page: ${prevpage}`);
       this.setState({
-        inipagearray: inipagearray,
+        inipagearray: newinipagearray,
         currentpage: page,
         initialitem: newlimits.newinitialitem,
         lastitem: newlimits.newlastitem,
@@ -179,15 +184,20 @@ class ReactNextPaging extends React.Component {
 
   goBack = () => {
     // console.log(`goBack()`);
-    let { currentpage, nopages, pagesspan } = this.state;
+    let { currentpage, nopages, pagesspan, inipagearray } = this.state;
     if (currentpage > 1) {
       let prevpage = currentpage - 1;
       let newlimits = this.computeBackLimits(prevpage);
-      let inipagearray = getIniPageofArray(nopages, pagesspan, currentpage);
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        prevpage,
+        inipagearray
+      );
       // console.log(`goBack() new page: ${prevpage}`);
       this.setState({
         currentpage: prevpage,
-        inipagearray: inipagearray,
+        inipagearray: newinipagearray,
         initialitem: newlimits.newinitialitem,
         lastitem: newlimits.newlastitem,
         goBackBdisabled: this.goBackButtonState(prevpage),
@@ -200,15 +210,20 @@ class ReactNextPaging extends React.Component {
 
   goFastBack = () => {
     // console.log(`goBack()`);
-    let { currentpage, nopages, pagesspan } = this.state;
+    let { currentpage, nopages, pagesspan, inipagearray } = this.state;
     if (currentpage > 1) {
       let prevpage = 1;
       let newlimits = this.computeBackLimits(prevpage);
-      let inipagearray = getIniPageofArray(nopages, pagesspan, prevpage);
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        prevpage,
+        inipagearray
+      );
       // console.log(`goBack() new page: ${prevpage}`);
       this.setState({
         currentpage: prevpage,
-        inipagearray: inipagearray,
+        inipagearray: newinipagearray,
         initialitem: newlimits.newinitialitem,
         lastitem: newlimits.newlastitem,
         goBackBdisabled: this.goBackButtonState(prevpage),
@@ -221,15 +236,20 @@ class ReactNextPaging extends React.Component {
 
   goFwd = () => {
     // console.log(`goFwd()`);
-    let { nopages, currentpage, pagesspan } = this.state;
+    let { nopages, currentpage, pagesspan, inipagearray } = this.state;
     if (currentpage < nopages) {
-      let nextpage = this.state.currentpage + 1;
+      let nextpage = currentpage + 1;
       let newlimits = this.computeFwdLimits(nextpage);
-      let inipagearray = getIniPageofArray(nopages, pagesspan, currentpage);
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        nextpage,
+        inipagearray
+      );
       // console.log(`goFwd() new page: ${nextpage}`);
       this.setState({
         currentpage: nextpage,
-        inipagearray: inipagearray,
+        inipagearray: newinipagearray,
         initialitem: newlimits.newinitialitem,
         lastitem: newlimits.newlastitem,
         goBackBdisabled: this.goBackButtonState(nextpage),
@@ -242,15 +262,20 @@ class ReactNextPaging extends React.Component {
 
   goFastFwd = () => {
     // console.log(`goFwd()`);
-    let { nopages, currentpage, pagesspan } = this.state;
+    let { nopages, currentpage, pagesspan, inipagearray } = this.state;
     if (currentpage < nopages) {
       let nextpage = nopages * 1;
       let newlimits = this.computeFwdLimits(nextpage);
-      let inipagearray = getIniPageofArray(nopages, pagesspan, nextpage);
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        nextpage,
+        inipagearray
+      );
       // console.log(`goFwd() new page: ${nextpage}`);
       this.setState({
         currentpage: nextpage,
-        inipagearray: inipagearray,
+        inipagearray: newinipagearray,
         initialitem: newlimits.newinitialitem,
         lastitem: newlimits.newlastitem,
         goBackBdisabled: this.goBackButtonState(nextpage),

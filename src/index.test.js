@@ -109,6 +109,13 @@ describe("getHalfPagesArray", () => {
     let pagesforarray = 9;
     let actual = getHalfPagesArray(pagesforarray);
 
+    expect(actual).toBe(4);
+  });
+
+  it("should return 5 given pagesforarray 11", () => {
+    let pagesforarray = 11;
+    let actual = getHalfPagesArray(pagesforarray);
+
     expect(actual).toBe(5);
   });
 });
@@ -118,7 +125,8 @@ describe("getIniPageofArray", () => {
     let nopages = 40;
     let pagesspan = 10;
     let page = 1;
-    let actual = getIniPageofArray(nopages, pagesspan, page);
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
     expect(actual).toBe(1);
   });
@@ -127,7 +135,8 @@ describe("getIniPageofArray", () => {
     let nopages = 40;
     let pagesspan = 10;
     let page = 6;
-    let actual = getIniPageofArray(nopages, pagesspan, page);
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
     expect(actual).toBe(1);
   });
@@ -136,7 +145,8 @@ describe("getIniPageofArray", () => {
     let nopages = 40;
     let pagesspan = 10;
     let page = 9;
-    let actual = getIniPageofArray(nopages, pagesspan, page);
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
     expect(actual).toBe(3);
   });
@@ -145,7 +155,8 @@ describe("getIniPageofArray", () => {
     let nopages = 40;
     let pagesspan = 10;
     let page = 17;
-    let actual = getIniPageofArray(nopages, pagesspan, page);
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
     expect(actual).toBe(11);
   });
@@ -154,7 +165,8 @@ describe("getIniPageofArray", () => {
     let nopages = 5;
     let pagesspan = 4;
     let page = 3;
-    let actual = getIniPageofArray(nopages, pagesspan, page);
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
     expect(actual).toBe(1);
   });
@@ -163,7 +175,8 @@ describe("getIniPageofArray", () => {
     let nopages = 4;
     let pagesspan = 10;
     let page = 1;
-    let actual = getIniPageofArray(nopages, pagesspan, page);
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
     expect(actual).toBe(1);
   });
@@ -172,7 +185,8 @@ describe("getIniPageofArray", () => {
     let nopages = 4;
     let pagesspan = 10;
     let page = 4;
-    let actual = getIniPageofArray(nopages, pagesspan, page);
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
     expect(actual).toBe(1);
   });
@@ -181,7 +195,8 @@ describe("getIniPageofArray", () => {
     let nopages = 4;
     let pagesspan = 10;
     let page = 20;
-    let actual = getIniPageofArray(nopages, pagesspan, page);
+    let inipagearray = 1;
+    let actual = getIniPageofArray(nopages, pagesspan, page, inipagearray);
 
     expect(actual).toBe(1);
   });
