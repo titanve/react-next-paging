@@ -1,0 +1,88 @@
+{
+  "name": "react-next-paging",
+  "jest": {
+    "verbose": true
+  },
+  "version": "0.0.0-semantically-released",
+  "description": "ReactJS component for easy pagination",
+  "main": "dist/react-next-paging.js",
+  "scripts": {
+    "commit": "git-cz",
+    "prebuild": "rimraf dist",
+    "build": "npm-run-all --parallel build:*",
+    "build:main": "babel --copy-files --out-dir dist --ignore *.test.js src",
+    "build:umd": "webpack --output-filename index.umd.js",
+    "build:umd.min": "webpack --output-filename index.umd.min.js -p",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "pagination",
+    "paging",
+    "react",
+    "reactjs",
+    "page",
+    "table",
+    "ul",
+    "row",
+    "column"
+  ],
+  "author": "Rafael Mora <rafael.mora.guti@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-loader": "7.1.2",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "prop-types": "15.6.0"
+  },
+  "peerDependencies": {
+    "babel-core": "6.26.0",
+    "react": "16.1.1"
+  },
+  "babel": {
+    "presets": [
+      "babel-preset-env",
+      "babel-preset-react",
+      "babel-preset-stage-0"
+    ]
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/titanve/react-next-paging.git"
+  },
+  "bugs": {
+    "url": "https://github.com/titanve/react-next-paging/issues"
+  },
+  "homepage": "https://github.com/titanve/react-next-paging#readme",
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-jest": "22.4.1",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.1.0",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "ghooks": "2.0.1",
+    "jest": "22.4.2",
+    "npm-run-all": "4.1.2",
+    "path": "0.12.7",
+    "react-test-renderer": "16.2.0",
+    "rimraf": "2.6.2",
+    "semantic-release": "^8.2.0",
+    "webpack": "3.8.1"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "yarn test"
+    },
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}
