@@ -17,9 +17,13 @@ before_install:
   - yarn add react react-dom
   - yarn add @babel/core @babel/cli -D
   - yarn add @babel/plugin-proposal-function-bind -D
+  - yarn add @babel/plugin-transform-runtime -D
+  - yarn add @babel/preset-env -D
+  - yarn add @babel/preset-react -D
+  - yarn add @babel/runtime -D
+  - yarn add @babel/register -D
   - yarn add babel-core@7.0.0-bridge.0 -D
   - yarn add jest babel-jest babel-core enzyme enzyme-adapter-react-16 -D
-  - yarn add @babel/register -D
   - yarn add react-test-renderer -D
 script:
   - yarn run test
