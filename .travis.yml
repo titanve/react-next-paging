@@ -15,8 +15,10 @@ before_install:
   - curl -o- -L https://yarnpkg.com/install.sh
   - export PATH="$HOME/.yarn/bin:$PATH"
   - yarn add react react-dom
-  - yarn add --dev jest babel-jest babel-core enzyme enzyme-adapter-react-16
-  - yarn add --dev react-test-renderer
+  - yarn add @babel/register -D
+  - yarn add babel-core@7.0.0-bridge.0 -D
+  - yarn add jest babel-jest babel-core enzyme enzyme-adapter-react-16 -D
+  - yarn add react-test-renderer -D
 script:
   - yarn run test
   - yarn run build
