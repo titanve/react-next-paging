@@ -15,11 +15,14 @@ before_install:
   - curl -o- -L https://yarnpkg.com/install.sh
   - export PATH="$HOME/.yarn/bin:$PATH"
   - yarn add react react-dom
+  - yarn add @babel/plugin-proposal-class-properties -D
+  - yarn add @babel/plugin-proposal-export-default-from -D
+  - yarn add @babel/plugin-proposal-export-namespace-from -D
+  - yarn add @babel/plugin-proposal-object-rest-spread -D
+  - yarn add @babel/core @babel/cli -D
   - yarn add @babel/core @babel/cli -D
   - yarn add @babel/plugin-proposal-function-bind -D
   - yarn add @babel/plugin-transform-runtime -D
-  - yarn add @babel/preset-env -D
-  - yarn add @babel/preset-react -D
   - yarn add @babel/runtime -D
   - yarn add @babel/register -D
   - yarn add babel-core@7.0.0-bridge.0 -D
