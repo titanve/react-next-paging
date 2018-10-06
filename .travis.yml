@@ -14,20 +14,22 @@ node_js:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh
   - export PATH="$HOME/.yarn/bin:$PATH"
-  - yarn add react react-dom
+  - yarn add @babel/core @babel/cli -D
   - yarn add @babel/plugin-proposal-class-properties -D
   - yarn add @babel/plugin-proposal-export-default-from -D
   - yarn add @babel/plugin-proposal-export-namespace-from -D
   - yarn add @babel/plugin-proposal-object-rest-spread -D
   - yarn add @babel/plugin-syntax-dynamic-import -D
-  - yarn add @babel/core @babel/cli -D
   - yarn add @babel/plugin-transform-template-literals -D
   - yarn add @babel/plugin-proposal-function-bind -D
   - yarn add @babel/plugin-transform-runtime -D
   - yarn add @babel/runtime -D
   - yarn add @babel/register -D
+  - yarn add regenerator-runtime -D
+  - yarn add babel-loader -D
   - yarn add babel-core@7.0.0-bridge.0 -D
-  - yarn add jest babel-jest babel-core enzyme enzyme-adapter-react-16 -D
+  - yarn add react react-dom
+  - yarn add jest babel-jest enzyme enzyme-adapter-react-16 -D
   - yarn add react-test-renderer -D
 script:
   - yarn run test
