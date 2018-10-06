@@ -15,7 +15,8 @@
     "build:umd.min": "webpack --mode=production --output-filename index.umd.min.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "keywords": [
     "pagination",
