@@ -28,6 +28,9 @@ script:
   - yarn run build
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
+deploy:
+  on:
+    tags: true
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
