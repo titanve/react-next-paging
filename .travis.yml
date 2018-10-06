@@ -24,9 +24,7 @@ before_install:
   - yarn add @babel/plugin-transform-template-literals -D
   - yarn add @babel/plugin-proposal-function-bind -D
   - yarn add @babel/plugin-transform-runtime -D
-  - yarn add @babel/runtime -D
-  - yarn add @babel/register -D
-  - yarn add regenerator-runtime -D
+  - yarn add @babel/runtime @babel/register regenerator-runtime -D
   - yarn add babel-loader -D
   - yarn add babel-core@7.0.0-bridge.0 -D
   - yarn add react react-dom
