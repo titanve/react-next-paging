@@ -2,10 +2,6 @@ language: node_js
 cache:
   directories:
     - ~/.npm
-branches:
-  only:
-    - master
-    - testingbranch
 notifications:
   email: false
 node_js:
@@ -34,6 +30,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
+    all_branches: true
