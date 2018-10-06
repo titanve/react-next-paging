@@ -19,8 +19,9 @@ before_install:
   - yarn add @babel/plugin-proposal-export-default-from -D
   - yarn add @babel/plugin-proposal-export-namespace-from -D
   - yarn add @babel/plugin-proposal-object-rest-spread -D
+  - yarn add @babel/plugin-syntax-dynamic-import -D
   - yarn add @babel/core @babel/cli -D
-  - yarn add @babel/core @babel/cli -D
+  - yarn add @babel/plugin-transform-template-literals -D
   - yarn add @babel/plugin-proposal-function-bind -D
   - yarn add @babel/plugin-transform-runtime -D
   - yarn add @babel/runtime -D
