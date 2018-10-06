@@ -20,7 +20,8 @@ before_install:
       @babel/plugin-transform-template-literals @babel/plugin-proposal-function-bind 
       @babel/plugin-transform-runtime @babel/runtime @babel/register regenerator-runtime 
       babel-loader babel-core@7.0.0-bridge.0 jest babel-jest enzyme enzyme-adapter-react-16 
-      react-test-renderer semantic-release-cli travis-deploy-once -D
+      react-test-renderer semantic-release@next semantic-release-cli travis-deploy-once 
+      @semantic-release/condition-travis -D
   - yarn add react react-dom
 script:
   - yarn run test
