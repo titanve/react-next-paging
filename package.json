@@ -13,7 +13,7 @@
     "build:main": "babel --copy-files --out-dir dist --ignore *.test.js src",
     "build:umd": "webpack --mode=development --output-filename index.umd.js",
     "build:umd.min": "webpack --mode=production --output-filename index.umd.min.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release-pre && npm publish && semantic-release-post",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -57,7 +57,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/titanve/react-next-paging.git"
+    "url": "https://github.com/titanve/react-next-paging.git"
   },
   "bugs": {
     "url": "https://github.com/titanve/react-next-paging/issues"
