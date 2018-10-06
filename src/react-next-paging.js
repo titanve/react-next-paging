@@ -102,6 +102,19 @@ class ReactNextPaging extends React.Component {
       let { currentpage } = prevState;
       let newstate = this.generateStateFromProps(this.props, currentpage);
       this.setState({ ...newstate });
+    } else if (this.props.items.length != prevProps.items.length) {
+      const { items } = this.props;
+      const { itemsperpage } = this.props;
+      const { pagesspan } = this.state;
+      let newnopages = getNoPages(items, itemsperpage);
+      let pagesforarray = isNoPagesLargerPagesSpan(newnopages, pagesspan)
+        ? pagesspan
+        : newnopages;
+      this.setState({
+        nopages: newnopages,
+        noitems: items.length,
+        pagesforarray: pagesforarray
+      });
     }
   }
 
@@ -136,23 +149,6 @@ class ReactNextPaging extends React.Component {
       goFastFwdBdisabled: this.goFastFwdButtonState(newcurrentpage, newnopages)
     };
   };
-
-  componentDidUpdate(prevProps) {
-    const { items } = this.props;
-    if (items.length != prevProps.items.length) {
-      const { itemsperpage } = this.props;
-      const { pagesspan } = this.state;
-      let newnopages = getNoPages(items, itemsperpage);
-      let pagesforarray = isNoPagesLargerPagesSpan(newnopages, pagesspan)
-        ? pagesspan
-        : newnopages;
-      this.setState({
-        nopages: newnopages,
-        noitems: items.length,
-        pagesforarray: pagesforarray
-      });
-    }
-  }
 
   computeBackLimits = prevpage => {
     let { itemsperpage } = this.props;
