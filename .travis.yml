@@ -2,7 +2,10 @@ language: node_js
 cache:
   directories:
     - ~/.npm
-all_branches: true
+branches:
+  only:
+    - master
+    - testingbranch
 notifications:
   email: false
 node_js:
