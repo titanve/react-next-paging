@@ -13,7 +13,7 @@
     "build:main": "babel --copy-files --out-dir dist --ignore *.test.js src",
     "build:umd": "webpack --mode=development --output-filename index.umd.js",
     "build:umd.min": "webpack --mode=production --output-filename index.umd.min.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release -b master -r https://github.com/titanve/react-next-paging.git -v pre && npm publish && semantic-release post",
     "test": "jest",
     "test:watch": "jest --watch",
     "travis-deploy-once": "travis-deploy-once"
