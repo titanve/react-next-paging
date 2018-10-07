@@ -3,7 +3,7 @@
   "jest": {
     "verbose": true
   },
-  "version": "0.0.0-development",
+  "version": "0.0.0-semantically-released",
   "description": "ReactJS component for easy pagination",
   "main": "dist/react-next-paging.js",
   "scripts": {
