@@ -103,8 +103,7 @@ class ReactNextPaging extends React.Component {
       let newstate = this.generateStateFromProps(this.props, currentpage);
       this.setState({ ...newstate });
     } else if (this.props.items.length != prevProps.items.length) {
-      const { items } = this.props;
-      const { itemsperpage } = this.props;
+      const { items, itemsperpage } = this.props;
       const { pagesspan } = this.state;
       let newnopages = getNoPages(items, itemsperpage);
       let pagesforarray = isNoPagesLargerPagesSpan(newnopages, pagesspan)

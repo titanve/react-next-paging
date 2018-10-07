@@ -23,11 +23,5 @@ before_install:
 script:
   - yarn run test
   - yarn run build
-deploy:
-  provider: script
-  script:
-    - npx travis-deploy-once "npx semantic-release"
-  skip_cleanup: true
-  on:
-    tags: true
-    all_branches: true
+after_success:
+  - yarn run semantic-release
