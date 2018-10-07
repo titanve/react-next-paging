@@ -5,7 +5,8 @@ function composeEventHandlers(...fns) {
   return (event, ...args) =>
     fns.some(fn => {
       fn && fn(event, ...args);
-      return event.persist();
+      event.persist();
+      return event.defaultPrevented;
     });
 }
 
