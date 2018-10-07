@@ -99,7 +99,7 @@ class ReactNextPaging extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.currentpage != prevProps.currentpage) {
-      let { currentpage } = prevState;
+      let { currentpage } = prevProps;
       let newstate = this.generateStateFromProps(this.props, currentpage);
       this.setState({ ...newstate });
     } else if (this.props.items.length != prevProps.items.length) {
