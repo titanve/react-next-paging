@@ -6,8 +6,8 @@ function composeEventHandlers(...fns) {
     fns.some(fn => {
       fn && fn(event, ...args);
       // event.persist();
-      // return event.defaultPrevented;
-      return event.preventDefault();
+      return event.defaultPrevented;
+      // return event.preventDefault();
     });
 }
 
@@ -105,8 +105,9 @@ class ReactNextPaging extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.items.length != prevProps.items.length) {
-      const { items, itemsperpage } = this.props;
+    const { items } = this.props;
+    if (items.length != prevProps.items.length) {
+      const { itemsperpage } = this.props;
       const { pagesspan } = this.state;
       let newnopages = getNoPages(items, itemsperpage);
       let pagesforarray = isNoPagesLargerPagesSpan(newnopages, pagesspan)
