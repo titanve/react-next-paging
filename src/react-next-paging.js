@@ -95,14 +95,15 @@ class ReactNextPaging extends React.Component {
     items: []
   };
 
-  // componentWillReceiveProps(nextProps) {}
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.setState(prevState => {
+      let { currentpage } = prevState;
+      return this.generateStateFromProps(nextProps, currentpage);
+    });
+  }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.currentpage != prevProps.currentpage) {
-      let { currentpage } = prevProps;
-      let newstate = this.generateStateFromProps(this.props, currentpage);
-      this.setState({ ...newstate });
-    } else if (this.props.items.length != prevProps.items.length) {
+    if (this.props.items.length != prevProps.items.length) {
       const { items, itemsperpage } = this.props;
       const { pagesspan } = this.state;
       let newnopages = getNoPages(items, itemsperpage);
