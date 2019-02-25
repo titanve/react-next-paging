@@ -6,8 +6,6 @@ function composeEventHandlers(...fns) {
     fns.some(fn => {
       fn && fn(event, ...args);
       event.persist();
-      // return event.defaultPrevented;
-      // return event.preventDefault();
     });
 }
 
@@ -16,7 +14,6 @@ export const getNoPages = (items = [], itemsperpage) => {
 };
 
 export const getHalfPagesArray = pagesforarray => {
-  // return Math.ceil(pagesforarray / 2);
   return Math.floor(pagesforarray / 2);
 };
 
@@ -31,46 +28,21 @@ export const isNoEven = no => {
 export const getIniPageofArray = (nopages, pagesspan, page, inipagearray) => {
   if (isNoPagesLargerPagesSpan(nopages, pagesspan)) {
     if (page <= nopages) {
-      // let pagesforarray = pagesspan;
       let halfspan = getHalfPagesArray(pagesspan);
       if (page >= halfspan + inipagearray) {
-        // if (isNoEven(page)) {
-        // return page - 4; ///  1 2 3 4 5 6 7 8 9 10
-        // return page - halfspan > 0 ? page - halfspan : 1;
-        // return Math.abs(page - halfspan);
         let newini = page - halfspan > 0 ? page - halfspan : 1;
         if (newini + pagesspan <= nopages) {
           return newini;
         } else {
-          // let diffspan = newini + pagesspan - nopages;
-          // return page - diffspan;
           return nopages - pagesspan + 1;
         }
-        // } else {
-        //   // return page - 5;
-        //   return page - halfspan - 1 > 0 ? page - halfspan - 1 : 1;
-        // }
       } else {
         if (page > 0) {
           return page - halfspan > 0 ? page - halfspan : 1;
         } else {
-          // return inipagearray;
           return 1;
         }
       }
-      // else {
-      // if (isNoEven(page)) {
-      // return inipagearray - 4; ///  1 2 3 4 5 6 7 8 9 10
-      // return inipagearray - halfspan > 0 ? inipagearray - halfspan : 1;
-      // return Math.abs(page - halfspan);
-      // return page - halfspan > 0 ? page - halfspan : 1;
-      // } else {
-      //   // return inipagearray - 5;
-      //   return inipagearray - halfspan - 1 > 0
-      //     ? inipagearray - halfspan - 1
-      //     : 1;
-      // }
-      // }
     }
   }
   return inipagearray;
