@@ -11,6 +11,7 @@ node_js:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh
   - export PATH="$HOME/.yarn/bin:$PATH"
+  - rm -rf yarn.lock
   - yarn add @babel/core @babel/cli @babel/plugin-proposal-class-properties
     @babel/plugin-proposal-export-default-from @babel/plugin-proposal-export-namespace-from
     @babel/plugin-proposal-object-rest-spread @babel/plugin-syntax-dynamic-import
