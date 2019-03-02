@@ -80,7 +80,7 @@
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.3.4",
     "@semantic-release/condition-travis": "7.1.4",
-    "@semantic-release/last-release-git-tag": "2.0.0",
+    "@semantic-release/git": "7.0.8",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
