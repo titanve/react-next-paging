@@ -72,7 +72,7 @@ class ReactNextPaging extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (
-      this.props.items !== prevProps.items ||
+      this.props.items.length !== prevProps.items.length ||
       this.props.itemsperpage !== prevProps.itemsperpage ||
       this.props.pagesspan !== prevProps.pagesspan
     ) {
