@@ -69,13 +69,6 @@ class ReactNextPaging extends React.Component {
     items: []
   };
 
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   this.setState(prevState => {
-  //     let { currentpage } = prevState;
-  //     return this.generateStateFromProps(nextProps, currentpage);
-  //   });
-  // }
-
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (
       this.props.items !== prevProps.items ||
