@@ -58,7 +58,8 @@ class ReactNextPaging extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = this.generateStateFromProps(props);
+    const newState = this.generateStateFromProps(props);
+    this.state = { ...newState };
   }
 
   static defaultProps = {
@@ -77,11 +78,12 @@ class ReactNextPaging extends React.Component {
     ) {
       const { currentpage } = prevState;
       const newState = this.generateStateFromProps(this.props, currentpage);
-      this.setState({ newState });
+      this.setState({ ...newState });
     }
   }
 
   generateStateFromProps = (props, currentpage = 1) => {
+    console.log("generateStateFromProps");
     const { items, itemsperpage, pagesspan } = props;
     let newnopages = getNoPages(items, itemsperpage);
     let newcurrentpage = currentpage;
