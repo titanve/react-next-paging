@@ -19,7 +19,7 @@ before_install:
     babel-loader babel-core@7.0.0-bridge.0 jest babel-jest enzyme enzyme-adapter-react-16
     react-test-renderer semantic-release@next semantic-release-cli travis-deploy-once
     @semantic-release/git -D
-  - yarn add react react-dom
+  - yarn add react react-dom prop-types
 script:
   - yarn run test
   - yarn run build
