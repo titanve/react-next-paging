@@ -117,9 +117,6 @@ class ReactNextPaging extends React.Component {
     let pagesforarray = isNoPagesLargerPagesSpan(newnopages, pagesspan)
       ? pagesspan
       : newnopages;
-    // console.log({ titulo: "newnopages", valor: newnopages });
-    // console.log({ titulo: "pagesspan", valor: pagesspan });
-    // console.log({ titulo: "pagesforarray", valor: pagesforarray });
 
     return {
       pagesspan: pagesspan,
