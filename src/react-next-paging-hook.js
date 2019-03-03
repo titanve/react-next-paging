@@ -78,6 +78,38 @@ export function ReactNextPaging({
       goFastFwdBdisabled: this.goFastFwdButtonState(newcurrentpage, newnopages)
     };
   };
+
+  goBackButtonState = prevpage => {
+    if (prevpage <= 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  goFastBackButtonState = prevpage => {
+    if (prevpage <= 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  goFwdButtonState = (nextpage, nopages) => {
+    if (nextpage >= nopages) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  goFastFwdButtonState = (nextpage, nopages) => {
+    if (nextpage >= nopages) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 }
 
 export default ReactNextPaging;
