@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export function ReactNextPaging({ items, itemsperpage, pagesspan }) {
+export function ReactNextPaging({ initialItems, initialItemsperpage, initialPagesspan }) {
   const [itemsperpage, setItemsPerPage] = useState(10);
   const [pagesspan, setPagesSpan] = useState(10);
   const [pagesforarray, setPagesForArray] = useState(10);
