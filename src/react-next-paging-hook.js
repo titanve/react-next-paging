@@ -1,6 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export function ReactNextPaging({ items, itemsperpage, pagesspan }) {
+  const [itemsperpage, setItemsPerPage] = useState(10);
+  const [pagesspan, setPagesSpan] = useState(10);
+  const [pagesforarray, setPagesForArray] = useState(10);
+  const [inipagearray, setIniPageArray] = useState(1);
+  const [items, setItems] = useState([]);
+
   const getNoPages = (items = [], itemsperpage) => {
     return Math.ceil(items.length / itemsperpage);
   };
