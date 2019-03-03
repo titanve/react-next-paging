@@ -88,22 +88,22 @@ class ReactNextPaging extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    const { items } = this.props;
-    if (items.length != prevProps.items.length) {
-      const { itemsperpage } = this.props;
-      const { pagesspan } = this.state;
-      let newnopages = getNoPages(items, itemsperpage);
-      let pagesforarray = isNoPagesLargerPagesSpan(newnopages, pagesspan)
-        ? pagesspan
-        : newnopages;
-      this.setState({
-        nopages: newnopages,
-        noitems: items.length,
-        pagesforarray: pagesforarray
-      });
-    }
-  }
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   const { items } = this.props;
+  //   if (items.length != prevProps.items.length) {
+  //     const { itemsperpage } = this.props;
+  //     const { pagesspan } = this.state;
+  //     let newnopages = getNoPages(items, itemsperpage);
+  //     let pagesforarray = isNoPagesLargerPagesSpan(newnopages, pagesspan)
+  //       ? pagesspan
+  //       : newnopages;
+  //     this.setState({
+  //       nopages: newnopages,
+  //       noitems: items.length,
+  //       pagesforarray: pagesforarray
+  //     });
+  //   }
+  // }
 
   generateStateFromProps = (props, currentpage = 1) => {
     const { items, itemsperpage, pagesspan } = props;
