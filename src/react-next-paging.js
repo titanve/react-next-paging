@@ -148,9 +148,6 @@ class ReactNextPaging extends React.Component {
     let { itemsperpage } = this.props;
     let newinitialitem = (nextpage - 1) * itemsperpage;
     let newlastitem = nextpage * itemsperpage;
-    // console.log(
-    //   `computeFwdLimits() newinitialitem: ${newinitialitem} newlastitem: ${newlastitem}`
-    // );
     return { newinitialitem, newlastitem };
   };
 
