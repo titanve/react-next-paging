@@ -58,6 +58,13 @@ export function ReactNextPaging({
   const [goFastFwdBdisabled, setGoFastFwdBdisabled] = useState(true);
   const [itemsperpage, setItemsPerPage] = useState(10);
   const [items, setItems] = useState([]);
+  useEffect(() => {
+    generateStateFromProps({
+      initialItems,
+      initialItemsperpage,
+      initialPagesspan
+    });
+  }, [initialItems, initialItemsperpage, initialPagesspan]);
 
   generateStateFromProps = (props, currentpage = 1) => {
     const { items, itemsperpage, pagesspan } = props;
@@ -80,12 +87,10 @@ export function ReactNextPaging({
     setInitialItem(newinitialitem);
     setLastItem(newlastitem);
     setCurrentPage(newcurrentpage);
-    setGoBackBdisabled(this.goBackButtonState(newcurrentpage));
-    setGoFastBackBdisabled(this.goFastBackButtonState(newcurrentpage));
-    setGoFwdBdisabled(this.goFwdButtonState(newcurrentpage, newnopages));
-    setGoFastFwdBdisabled(
-      this.goFastFwdButtonState(newcurrentpage, newnopages)
-    );
+    setGoBackBdisabled(goBackButtonState(newcurrentpage));
+    setGoFastBackBdisabled(goFastBackButtonState(newcurrentpage));
+    setGoFwdBdisabled(goFwdButtonState(newcurrentpage, newnopages));
+    setGoFastFwdBdisabled(goFastFwdButtonState(newcurrentpage, newnopages));
   };
 
   goBackButtonState = prevpage => {
