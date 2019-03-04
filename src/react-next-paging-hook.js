@@ -92,6 +92,164 @@ export function ReactNextPaging({
     setGoFwdBdisabled(goFwdButtonState(newcurrentpage, newnopages));
     setGoFastFwdBdisabled(goFastFwdButtonState(newcurrentpage, newnopages));
   };
+  computeBackLimits = prevpage => {
+    let { itemsperpage } = this.props;
+    let newinitialitem = (prevpage - 1) * itemsperpage;
+    let newlastitem = prevpage * itemsperpage;
+    // console.log(
+    //   `computeBackLimits() newsetInitialItem(${newinitialitem} newsetLastItem(${newlastitem}`
+    // );
+    return { newinitialitem, newlastitem };
+  };
+
+  computeFwdLimits = nextpage => {
+    let { itemsperpage } = this.props;
+    let newinitialitem = (nextpage - 1) * itemsperpage;
+    let newlastitem = nextpage * itemsperpage;
+    // console.log(
+    //   `computeFwdLimits() newsetInitialItem(${newinitialitem} newsetLastItem(${newlastitem}`
+    // );
+    return { newinitialitem, newlastitem };
+  };
+
+  computeSelectedPageLimits = selpage => {
+    let { itemsperpage } = this.props;
+    let newinitialitem = (selpage - 1) * itemsperpage;
+    let newlastitem = selpage * itemsperpage;
+    // console.log(
+    //   `computeFwdLimits() newsetInitialItem(${newinitialitem} newsetLastItem(${newlastitem}`
+    // );
+    return { newinitialitem, newlastitem };
+  };
+
+  goToPage = (page, event) => {
+    let { currentpage, nopages, pagesspan, inipagearray } = this.state;
+    if (page > 0 && page <= nopages) {
+      // let prevpage = currentpage - 1;
+      let newlimits = this.computeSelectedPageLimits(page);
+      // let inipagearray = getIniPageofArray(nopages, pagesspan, currentpage);
+      // console.log({ titulo: "nopages", valor: nopages });
+      // console.log({ titulo: "pagesspan", valor: pagesspan });
+      // console.log({ titulo: "page", valor: page });
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        page,
+        inipagearray
+      );
+      // console.log({ titulo: "goToPage->inipagearray", valor: inipagearray });
+      // console.log(`goBack() new page: ${prevpage}`);
+
+      setIniPageArray(newinipagearray);
+      setCurrentPage(page);
+      setInitialItem(newlimits.newinitialitem);
+      setLastItem(newlimits.newlastitem);
+      setGoBackBdisabled(this.goBackButtonState(page));
+      setGoFastBackBdisabled(this.goFastBackButtonState(page));
+      setGoFwdBdisabled(this.goFwdButtonState(page, nopages));
+      setGoFastFwdBdisabled(this.goFastFwdButtonState(page, nopages));
+    }
+  };
+
+  goBack = () => {
+    // console.log(`goBack()`);
+    let { currentpage, nopages, pagesspan, inipagearray } = this.state;
+    if (currentpage > 1) {
+      let prevpage = currentpage - 1;
+      let newlimits = this.computeBackLimits(prevpage);
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        prevpage,
+        inipagearray
+      );
+      // console.log(`goBack() new page: ${prevpage}`);
+
+      setCurrentPage(prevpage);
+      setIniPageArray(newinipagearray);
+      setInitialItem(newlimits.newinitialitem);
+      setLastItem(newlimits.newlastitem);
+      setGoBackBdisabled(this.goBackButtonState(prevpage));
+      setGoFastBackBdisabled(this.goFastBackButtonState(prevpage));
+      setGoFwdBdisabled(this.goFwdButtonState(prevpage, nopages));
+      setGoFastFwdBdisabled(this.goFastFwdButtonState(prevpage, nopages));
+    }
+  };
+
+  goFastBack = () => {
+    // console.log(`goBack()`);
+    let { currentpage, nopages, pagesspan, inipagearray } = this.state;
+    if (currentpage > 1) {
+      let prevpage = 1;
+      let newlimits = this.computeBackLimits(prevpage);
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        prevpage,
+        inipagearray
+      );
+      // console.log(`goBack() new page: ${prevpage}`);
+
+      setCurrentPage(prevpage);
+      setIniPageArray(newinipagearray);
+      setInitialItem(newlimits.newinitialitem);
+      setLastItem(newlimits.newlastitem);
+      setGoBackBdisabled(this.goBackButtonState(prevpage));
+      setGoFastBackBdisabled(this.goFastBackButtonState(prevpage));
+      setGoFwdBdisabled(this.goFwdButtonState(prevpage, nopages));
+      setGoFastFwdBdisabled(this.goFastFwdButtonState(prevpage, nopages));
+    }
+  };
+
+  goFwd = () => {
+    // console.log(`goFwd()`);
+    let { nopages, currentpage, pagesspan, inipagearray } = this.state;
+    if (currentpage < nopages) {
+      let nextpage = currentpage + 1;
+      let newlimits = this.computeFwdLimits(nextpage);
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        nextpage,
+        inipagearray
+      );
+      // console.log(`goFwd() new page: ${nextpage}`);
+
+      setCurrentPage(nextpage);
+      setIniPageArray(newinipagearray);
+      setInitialItem(newlimits.newinitialitem);
+      setLastItem(newlimits.newlastitem);
+      setGoBackBdisabled(this.goBackButtonState(nextpage));
+      setGoFastBackBdisabled(this.goFastBackButtonState(nextpage));
+      setGoFwdBdisabled(this.goFwdButtonState(nextpage, nopages));
+      setGoFastFwdBdisabled(this.goFastFwdButtonState(nextpage, nopages));
+    }
+  };
+
+  goFastFwd = () => {
+    // console.log(`goFwd()`);
+    let { nopages, currentpage, pagesspan, inipagearray } = this.state;
+    if (currentpage < nopages) {
+      let nextpage = nopages * 1;
+      let newlimits = this.computeFwdLimits(nextpage);
+      let newinipagearray = getIniPageofArray(
+        nopages,
+        pagesspan,
+        nextpage,
+        inipagearray
+      );
+      // console.log(`goFwd() new page: ${nextpage}`);
+
+      setCurrentPage(nextpage);
+      setIniPageArray(newinipagearray);
+      setInitialItem(newlimits.newinitialitem);
+      setLastItem(newlimits.newlastitem);
+      setGoBackBdisabled(this.goBackButtonState(nextpage));
+      setGoFastBackBdisabled(this.goFastBackButtonState(nextpage));
+      setGoFwdBdisabled(this.goFwdButtonState(nextpage, nopages));
+      setGoFastFwdBdisabled(this.goFastFwdButtonState(nextpage, nopages));
+    }
+  };
 
   goBackButtonState = prevpage => {
     if (prevpage <= 1) {
