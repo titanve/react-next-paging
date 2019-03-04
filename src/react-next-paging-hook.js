@@ -44,10 +44,19 @@ export function ReactNextPaging({
   initialItemsperpage,
   initialPagesspan
 }) {
-  const [itemsperpage, setItemsPerPage] = useState(10);
   const [pagesspan, setPagesSpan] = useState(10);
-  const [pagesforarray, setPagesForArray] = useState(10);
   const [inipagearray, setIniPageArray] = useState(1);
+  const [pagesforarray, setPagesForArray] = useState(10);
+  const [nopages, setNoPages] = useState(1);
+  const [noitems, setNoItems] = useState(1);
+  const [initialitem, setInitialItem] = useState(1);
+  const [lastitem, setLastItem] = useState(10);
+  const [currentpage, setCurrentPage] = useState(1);
+  const [goBackBdisabled, setGoBackBdisabled] = useState(true);
+  const [goFastBackBdisabled, setGoFastBackBdisabled] = useState(true);
+  const [goFwdBdisabled, setGoFwdBdisabled] = useState(true);
+  const [goFastFwdBdisabled, setGoFastFwdBdisabled] = useState(true);
+  const [itemsperpage, setItemsPerPage] = useState(10);
   const [items, setItems] = useState([]);
 
   generateStateFromProps = (props, currentpage = 1) => {
@@ -63,20 +72,20 @@ export function ReactNextPaging({
       ? pagesspan
       : newnopages;
 
-    return {
-      pagesspan: pagesspan,
-      inipagearray: 1,
-      pagesforarray: pagesforarray,
-      nopages: newnopages,
-      noitems: items.length,
-      initialitem: newinitialitem,
-      lastitem: newlastitem,
-      currentpage: newcurrentpage,
-      goBackBdisabled: this.goBackButtonState(newcurrentpage),
-      goFastBackBdisabled: this.goFastBackButtonState(newcurrentpage),
-      goFwdBdisabled: this.goFwdButtonState(newcurrentpage, newnopages),
-      goFastFwdBdisabled: this.goFastFwdButtonState(newcurrentpage, newnopages)
-    };
+    setPagesSpan(pagesspan);
+    setIniPageArray(1);
+    setPagesForArray(pagesforarray);
+    setNoPages(newnopages);
+    setNoItems(items.length);
+    setInitialItem(newinitialitem);
+    setLastItem(newlastitem);
+    setCurrentPage(newcurrentpage);
+    setGoBackBdisabled(this.goBackButtonState(newcurrentpage));
+    setGoFastBackBdisabled(this.goFastBackButtonState(newcurrentpage));
+    setGoFwdBdisabled(this.goFwdButtonState(newcurrentpage, newnopages));
+    setGoFastFwdBdisabled(
+      this.goFastFwdButtonState(newcurrentpage, newnopages)
+    );
   };
 
   goBackButtonState = prevpage => {
