@@ -1,73 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-export const getNoPages = (items = [], itemsperpage) => {
-  return Math.ceil(items.length / itemsperpage);
-};
-
-export const getHalfPagesArray = pagesforarray => {
-  return Math.floor(pagesforarray / 2);
-};
-
-export const isNoPagesLargerPagesSpan = (nopages, pagesspan) => {
-  return nopages > pagesspan;
-};
-
-export const isNoEven = no => {
-  return no % 2 === 0;
-};
-
-export const getIniPageofArray = (nopages, pagesspan, page, inipagearray) => {
-  if (isNoPagesLargerPagesSpan(nopages, pagesspan)) {
-    if (page <= nopages) {
-      let halfspan = getHalfPagesArray(pagesspan);
-      if (page >= halfspan + inipagearray) {
-        let newini = page - halfspan > 0 ? page - halfspan : 1;
-        if (newini + pagesspan <= nopages) {
-          return newini;
-        } else {
-          return nopages - pagesspan + 1;
-        }
-      } else {
-        if (page > 0) {
-          return page - halfspan > 0 ? page - halfspan : 1;
-        } else {
-          return 1;
-        }
-      }
-    }
-  }
-  return inipagearray;
-};
-
-export function ReactNextPaging({
-  initialItems,
-  initialItemsperpage,
-  initialPagesspan
-}) {
-  const [pagesspan, setPagesSpan] = useState(10);
-  const [inipagearray, setIniPageArray] = useState(1);
-  const [pagesforarray, setPagesForArray] = useState(10);
-  const [nopages, setNoPages] = useState(1);
-  const [noitems, setNoItems] = useState(1);
-  const [initialitem, setInitialItem] = useState(1);
-  const [lastitem, setLastItem] = useState(10);
-  const [currentpage, setCurrentPage] = useState(1);
+const useReactNextPaging = ({ items, itemsperpage, pagesspan }) => {
+  const [itemsperpage, setItemsperpage] = useState(10);
+  const [pagesspan, setPagesspan] = useState(10);
+  const [pagesforarray, setPagesforarray] = useState(10);
+  const [inipagearray, setInipagearray] = useState(1);
+  const [items, setItems] = useState([]);
+  const [nopages, setNopages] = useState(1);
+  const [noitems, setNoitems] = useState(1);
+  const [initialitem, setInitialitem] = useState(1);
+  const [lastitem, setLastitem] = useState(10);
+  const [currentpage, setCurrentpage] = useState(1);
   const [goBackBdisabled, setGoBackBdisabled] = useState(true);
   const [goFastBackBdisabled, setGoFastBackBdisabled] = useState(true);
   const [goFwdBdisabled, setGoFwdBdisabled] = useState(true);
   const [goFastFwdBdisabled, setGoFastFwdBdisabled] = useState(true);
-  const [itemsperpage, setItemsPerPage] = useState(10);
-  const [items, setItems] = useState([]);
-  useEffect(() => {
-    generateStateFromProps({
-      initialItems,
-      initialItemsperpage,
-      initialPagesspan
-    });
-  }, [initialItems, initialItemsperpage, initialPagesspan]);
 
-  generateStateFromProps = (props, currentpage = 1) => {
-    const { items, itemsperpage, pagesspan } = props;
+  React.useEffect(() => {
+    generateStateFromProps();
+  }, []);
+
+  const getNoPages = (items = [], itemsperpage) => {
+    return Math.ceil(items.length / itemsperpage);
+  };
+
+  const getHalfPagesArray = pagesforarray => {
+    return Math.floor(pagesforarray / 2);
+  };
+
+  const isNoPagesLargerPagesSpan = (nopages, pagesspan) => {
+    return nopages > pagesspan;
+  };
+
+  const isNoEven = no => {
+    return no % 2 === 0;
+  };
+
+  const generateStateFromProps = (currentpage = 1) => {
     let newnopages = getNoPages(items, itemsperpage);
     let newcurrentpage = currentpage;
     if (currentpage > newnopages) {
@@ -78,51 +47,53 @@ export function ReactNextPaging({
     let pagesforarray = isNoPagesLargerPagesSpan(newnopages, pagesspan)
       ? pagesspan
       : newnopages;
-
-    setPagesSpan(pagesspan);
-    setIniPageArray(1);
-    setPagesForArray(pagesforarray);
-    setNoPages(newnopages);
-    setNoItems(items.length);
-    setInitialItem(newinitialitem);
-    setLastItem(newlastitem);
-    setCurrentPage(newcurrentpage);
-    setGoBackBdisabled(goBackButtonState(newcurrentpage));
-    setGoFastBackBdisabled(goFastBackButtonState(newcurrentpage));
-    setGoFwdBdisabled(goFwdButtonState(newcurrentpage, newnopages));
-    setGoFastFwdBdisabled(goFastFwdButtonState(newcurrentpage, newnopages));
+    setPagesspan(pagesspan);
+    setInipagearray(1);
+    setPagesforarray(pagesforarray);
+    setNopages(newnopages);
+    setNoitems(items.length);
+    setInitialitem(newinitialitem);
+    setLastitem(newlastitem);
+    setCurrentpage(newcurrentpage);
+    setGoBackBdisabled(this.goBackButtonState(newcurrentpage));
+    setGoFastBackBdisabled(this.goFastBackButtonState(newcurrentpage));
+    setGoFwdBdisabled(this.goFwdButtonState(newcurrentpage, newnopages));
+    setGoFastFwdBdisabled(
+      this.goFastFwdButtonState(newcurrentpage, newnopages)
+    );
   };
-  computeBackLimits = prevpage => {
+
+  const computeBackLimits = prevpage => {
     let { itemsperpage } = this.props;
     let newinitialitem = (prevpage - 1) * itemsperpage;
     let newlastitem = prevpage * itemsperpage;
     // console.log(
-    //   `computeBackLimits() newsetInitialItem(${newinitialitem} newsetLastItem(${newlastitem}`
+    //   `computeBackLimits() newsetInitialitem(${newinitialitem} newsetLastitem(${newlastitem}`
     // );
     return { newinitialitem, newlastitem };
   };
 
-  computeFwdLimits = nextpage => {
+  const computeFwdLimits = nextpage => {
     let { itemsperpage } = this.props;
     let newinitialitem = (nextpage - 1) * itemsperpage;
     let newlastitem = nextpage * itemsperpage;
     // console.log(
-    //   `computeFwdLimits() newsetInitialItem(${newinitialitem} newsetLastItem(${newlastitem}`
+    //   `computeFwdLimits() newsetInitialitem(${newinitialitem} newsetLastitem(${newlastitem}`
     // );
     return { newinitialitem, newlastitem };
   };
 
-  computeSelectedPageLimits = selpage => {
+  const computeSelectedPageLimits = selpage => {
     let { itemsperpage } = this.props;
     let newinitialitem = (selpage - 1) * itemsperpage;
     let newlastitem = selpage * itemsperpage;
     // console.log(
-    //   `computeFwdLimits() newsetInitialItem(${newinitialitem} newsetLastItem(${newlastitem}`
+    //   `computeFwdLimits() newsetInitialitem(${newinitialitem} newsetLastitem(${newlastitem}`
     // );
     return { newinitialitem, newlastitem };
   };
 
-  goToPage = (page, event) => {
+  const goToPage = (page, event) => {
     let { currentpage, nopages, pagesspan, inipagearray } = this.state;
     if (page > 0 && page <= nopages) {
       // let prevpage = currentpage - 1;
@@ -139,11 +110,10 @@ export function ReactNextPaging({
       );
       // console.log({ titulo: "goToPage->inipagearray", valor: inipagearray });
       // console.log(`goBack() new page: ${prevpage}`);
-
-      setIniPageArray(newinipagearray);
-      setCurrentPage(page);
-      setInitialItem(newlimits.newinitialitem);
-      setLastItem(newlimits.newlastitem);
+      setInipagearray(newinipagearray);
+      setCurrentpage(page);
+      setInitialitem(newlimits.newinitialitem);
+      setLastitem(newlimits.newlastitem);
       setGoBackBdisabled(this.goBackButtonState(page));
       setGoFastBackBdisabled(this.goFastBackButtonState(page));
       setGoFwdBdisabled(this.goFwdButtonState(page, nopages));
@@ -151,7 +121,7 @@ export function ReactNextPaging({
     }
   };
 
-  goBack = () => {
+  const goBack = () => {
     // console.log(`goBack()`);
     let { currentpage, nopages, pagesspan, inipagearray } = this.state;
     if (currentpage > 1) {
@@ -164,11 +134,10 @@ export function ReactNextPaging({
         inipagearray
       );
       // console.log(`goBack() new page: ${prevpage}`);
-
-      setCurrentPage(prevpage);
-      setIniPageArray(newinipagearray);
-      setInitialItem(newlimits.newinitialitem);
-      setLastItem(newlimits.newlastitem);
+      setCurrentpage(prevpage);
+      setInipagearray(newinipagearray);
+      setInitialitem(newlimits.newinitialitem);
+      setLastitem(newlimits.newlastitem);
       setGoBackBdisabled(this.goBackButtonState(prevpage));
       setGoFastBackBdisabled(this.goFastBackButtonState(prevpage));
       setGoFwdBdisabled(this.goFwdButtonState(prevpage, nopages));
@@ -176,7 +145,7 @@ export function ReactNextPaging({
     }
   };
 
-  goFastBack = () => {
+  const goFastBack = () => {
     // console.log(`goBack()`);
     let { currentpage, nopages, pagesspan, inipagearray } = this.state;
     if (currentpage > 1) {
@@ -189,11 +158,10 @@ export function ReactNextPaging({
         inipagearray
       );
       // console.log(`goBack() new page: ${prevpage}`);
-
-      setCurrentPage(prevpage);
-      setIniPageArray(newinipagearray);
-      setInitialItem(newlimits.newinitialitem);
-      setLastItem(newlimits.newlastitem);
+      setCurrentpage(prevpage);
+      setInipagearray(newinipagearray);
+      setInitialitem(newlimits.newinitialitem);
+      setLastitem(newlimits.newlastitem);
       setGoBackBdisabled(this.goBackButtonState(prevpage));
       setGoFastBackBdisabled(this.goFastBackButtonState(prevpage));
       setGoFwdBdisabled(this.goFwdButtonState(prevpage, nopages));
@@ -201,7 +169,7 @@ export function ReactNextPaging({
     }
   };
 
-  goFwd = () => {
+  const goFwd = () => {
     // console.log(`goFwd()`);
     let { nopages, currentpage, pagesspan, inipagearray } = this.state;
     if (currentpage < nopages) {
@@ -214,11 +182,10 @@ export function ReactNextPaging({
         inipagearray
       );
       // console.log(`goFwd() new page: ${nextpage}`);
-
-      setCurrentPage(nextpage);
-      setIniPageArray(newinipagearray);
-      setInitialItem(newlimits.newinitialitem);
-      setLastItem(newlimits.newlastitem);
+      setCurrentpage(nextpage);
+      setInipagearray(newinipagearray);
+      setInitialitem(newlimits.newinitialitem);
+      setLastitem(newlimits.newlastitem);
       setGoBackBdisabled(this.goBackButtonState(nextpage));
       setGoFastBackBdisabled(this.goFastBackButtonState(nextpage));
       setGoFwdBdisabled(this.goFwdButtonState(nextpage, nopages));
@@ -226,7 +193,7 @@ export function ReactNextPaging({
     }
   };
 
-  goFastFwd = () => {
+  const goFastFwd = () => {
     // console.log(`goFwd()`);
     let { nopages, currentpage, pagesspan, inipagearray } = this.state;
     if (currentpage < nopages) {
@@ -239,11 +206,10 @@ export function ReactNextPaging({
         inipagearray
       );
       // console.log(`goFwd() new page: ${nextpage}`);
-
-      setCurrentPage(nextpage);
-      setIniPageArray(newinipagearray);
-      setInitialItem(newlimits.newinitialitem);
-      setLastItem(newlimits.newlastitem);
+      setCurrentpage(nextpage);
+      setInipagearray(newinipagearray);
+      setInitialitem(newlimits.newinitialitem);
+      setLastitem(newlimits.newlastitem);
       setGoBackBdisabled(this.goBackButtonState(nextpage));
       setGoFastBackBdisabled(this.goFastBackButtonState(nextpage));
       setGoFwdBdisabled(this.goFwdButtonState(nextpage, nopages));
@@ -251,37 +217,41 @@ export function ReactNextPaging({
     }
   };
 
-  goBackButtonState = prevpage => {
-    if (prevpage <= 1) {
-      return true;
-    } else {
-      return false;
-    }
+  const goBackButtonState = prevpage => {
+    return prevpage <= 1 ? true : false;
   };
 
-  goFastBackButtonState = prevpage => {
-    if (prevpage <= 1) {
-      return true;
-    } else {
-      return false;
-    }
+  const goFastBackButtonState = prevpage => {
+    return prevpage <= 1 ? true : false;
   };
 
-  goFwdButtonState = (nextpage, nopages) => {
-    if (nextpage >= nopages) {
-      return true;
-    } else {
-      return false;
-    }
+  const goFwdButtonState = (nextpage, nopages) => {
+    return nextpage >= nopages ? true : false;
   };
 
-  goFastFwdButtonState = (nextpage, nopages) => {
-    if (nextpage >= nopages) {
-      return true;
-    } else {
-      return false;
-    }
+  const goFastFwdButtonState = (nextpage, nopages) => {
+    return nextpage >= nopages ? true : false;
   };
-}
 
-export default ReactNextPaging;
+  return [
+    this.goBack,
+    this.goFastBack,
+    this.goFwd,
+    this.goFastFwd,
+    this.goToPage,
+    // state
+    nopages,
+    pagesforarray,
+    inipagearray,
+    currentpage,
+    noitems,
+    initialitem,
+    lastitem,
+    goBackBdisabled,
+    goFastBackBdisabled,
+    goFwdBdisabled,
+    goFastFwdBdisabled
+  ];
+};
+
+export default useReactNextPaging;
