@@ -1,5 +1,9 @@
 Arguments: 
+<<<<<<< HEAD
   /usr/local/Cellar/node/11.10.0/bin/node /usr/local/Cellar/yarn/1.13.0/libexec/bin/yarn.js add @octokit/rest -D
+=======
+  /usr/local/Cellar/node/11.10.0/bin/node /usr/local/Cellar/yarn/1.13.0/libexec/bin/yarn.js upgrade react react-dom prop-types --latest
+>>>>>>> next
 
 PATH: 
   /usr/local/mysql-5.7.21-macos10.13-x86_64/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/mysql-5.7.21-macos10.13-x86_64/bin
@@ -14,7 +18,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/event-stream/-/event-stream-3.3.6.tgz: Request failed "404 Not Found"
+  Error: https://registry.yarnpkg.com/flatmap-stream/-/flatmap-stream-0.1.1.tgz: Request failed "404 Not Found"
       at ResponseError.ExtendableBuiltin (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:702:66)
       at new ResponseError (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:808:124)
       at Request.<anonymous> (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:66325:16)
@@ -42,7 +46,11 @@ npm manifest:
       "build:main": "babel --copy-files --out-dir dist --ignore *.test.js src",
       "build:umd": "webpack --mode=development --output-filename index.umd.js",
       "build:umd.min": "webpack --mode=production --output-filename index.umd.min.js",
+<<<<<<< HEAD
       "semantic-release": "semantic-release -b master --prepare && npm publish && semantic-release post",
+=======
+      "semantic-release": "semantic-release -b master pre && npm publish && semantic-release post",
+>>>>>>> next
       "test": "jest",
       "test:watch": "jest --watch",
       "travis-deploy-once": "travis-deploy-once"
@@ -109,6 +117,10 @@ npm manifest:
       "@babel/register": "^7.0.0",
       "@babel/runtime": "^7.1.2",
       "@semantic-release/condition-travis": "7.1.4",
+<<<<<<< HEAD
+=======
+      "@semantic-release/last-release-git-tag": "2.0.0",
+>>>>>>> next
       "babel-core": "7.0.0-bridge.0",
       "babel-jest": "^23.6.0",
       "babel-loader": "^8.0.4",

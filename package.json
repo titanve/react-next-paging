@@ -79,7 +79,6 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.3.4",
-    "@octokit/rest": "16.16.3",
     "@semantic-release/condition-travis": "7.1.4",
     "@semantic-release/git": "7.0.8",
     "babel-core": "7.0.0-bridge.0",
