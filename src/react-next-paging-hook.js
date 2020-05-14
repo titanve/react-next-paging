@@ -24,7 +24,7 @@ const useReactNextPaging = ({ items, itemsperpage, pagesspan }) => {
     return Math.ceil(items.length / itemsperpage);
   };
 
-  const getHalfPagesArray = pagesforarray => {
+  const getHalfPagesArray = (pagesforarray) => {
     return Math.floor(pagesforarray / 2);
   };
 
@@ -32,7 +32,7 @@ const useReactNextPaging = ({ items, itemsperpage, pagesspan }) => {
     return nopages > pagesspan;
   };
 
-  const isNoEven = no => {
+  const isNoEven = (no) => {
     return no % 2 === 0;
   };
 
@@ -63,7 +63,7 @@ const useReactNextPaging = ({ items, itemsperpage, pagesspan }) => {
     );
   };
 
-  const computeBackLimits = prevpage => {
+  const computeBackLimits = (prevpage) => {
     let { itemsperpage } = this.props;
     let newinitialitem = (prevpage - 1) * itemsperpage;
     let newlastitem = prevpage * itemsperpage;
@@ -73,7 +73,7 @@ const useReactNextPaging = ({ items, itemsperpage, pagesspan }) => {
     return { newinitialitem, newlastitem };
   };
 
-  const computeFwdLimits = nextpage => {
+  const computeFwdLimits = (nextpage) => {
     let { itemsperpage } = this.props;
     let newinitialitem = (nextpage - 1) * itemsperpage;
     let newlastitem = nextpage * itemsperpage;
@@ -83,7 +83,7 @@ const useReactNextPaging = ({ items, itemsperpage, pagesspan }) => {
     return { newinitialitem, newlastitem };
   };
 
-  const computeSelectedPageLimits = selpage => {
+  const computeSelectedPageLimits = (selpage) => {
     let { itemsperpage } = this.props;
     let newinitialitem = (selpage - 1) * itemsperpage;
     let newlastitem = selpage * itemsperpage;
@@ -217,11 +217,11 @@ const useReactNextPaging = ({ items, itemsperpage, pagesspan }) => {
     }
   };
 
-  const goBackButtonState = prevpage => {
+  const goBackButtonState = (prevpage) => {
     return prevpage <= 1 ? true : false;
   };
 
-  const goFastBackButtonState = prevpage => {
+  const goFastBackButtonState = (prevpage) => {
     return prevpage <= 1 ? true : false;
   };
 
@@ -233,12 +233,12 @@ const useReactNextPaging = ({ items, itemsperpage, pagesspan }) => {
     return nextpage >= nopages ? true : false;
   };
 
-  return [
-    this.goBack,
-    this.goFastBack,
-    this.goFwd,
-    this.goFastFwd,
-    this.goToPage,
+  return {
+    goBack,
+    goFastBack,
+    goFwd,
+    goFastFwd,
+    goToPage,
     // state
     nopages,
     pagesforarray,
@@ -250,8 +250,8 @@ const useReactNextPaging = ({ items, itemsperpage, pagesspan }) => {
     goBackBdisabled,
     goFastBackBdisabled,
     goFwdBdisabled,
-    goFastFwdBdisabled
-  ];
+    goFastFwdBdisabled,
+  };
 };
 
 export default useReactNextPaging;
