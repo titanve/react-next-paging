@@ -5,7 +5,6 @@ const useReactNextPaging = (items, itemsperpage, pagesspan) => {
   const [pagesspan, setPagesspan] = useState(10);
   const [pagesforarray, setPagesforarray] = useState(10);
   const [inipagearray, setInipagearray] = useState(1);
-  const [items, setItems] = useState([]);
   const [nopages, setNopages] = useState(1);
   const [noitems, setNoitems] = useState(1);
   const [initialitem, setInitialitem] = useState(1);
