@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 const useReactNextPaging = (items, itemsperpage, pagesspan) => {
-  const [itemsperpage, setItemsperpage] = useState(10);
-  const [pagesspan, setPagesspan] = useState(10);
   const [pagesforarray, setPagesforarray] = useState(10);
   const [inipagearray, setInipagearray] = useState(1);
   const [nopages, setNopages] = useState(1);
@@ -90,7 +88,7 @@ const useReactNextPaging = (items, itemsperpage, pagesspan) => {
   };
 
   const goToPage = (page, event) => {
-    let { currentpage, nopages, pagesspan, inipagearray } = this.state;
+    let { nopages, pagesspan, inipagearray } = this.state;
     if (page > 0 && page <= nopages) {
       // let prevpage = currentpage - 1;
       let newlimits = this.computeSelectedPageLimits(page);
