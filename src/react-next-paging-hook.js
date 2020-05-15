@@ -67,9 +67,6 @@ const useReactNextPaging = (items, itemsperpage, pagesspan) => {
     let { itemsperpage } = this.props;
     let newinitialitem = (prevpage - 1) * itemsperpage;
     let newlastitem = prevpage * itemsperpage;
-    // console.log(
-    //   `computeBackLimits() newsetInitialitem(${newinitialitem} newsetLastitem(${newlastitem}`
-    // );
     return { newinitialitem, newlastitem };
   };
 
